@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import Layout from './layout';
+import theme from './contants/theme';
+import { ThemeProvider } from 'styled-components';
+import { useWindowWidth } from '@react-hook/window-size';
 
 function App() {
+  const [isMobile, setIsMobile] = useState(false);
+  const width = useWindowWidth();
+
+  useEffect(() => {
+    setIsMobile(width < theme.length.mobileWidthLimit);
+  }, [width]);
+
+  console.log(isMobile);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={{ isMobile, ...theme }}>
+      <Layout>
+      </Layout>
+    </ThemeProvider>
   );
 }
 
