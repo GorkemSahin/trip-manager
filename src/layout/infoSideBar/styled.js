@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 
-export const OuterDiv = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  width: ${({ theme: { length } }) => length.infoSideBarWidth };
+export const StyledDiv = styled.div`
   display: ${({ theme: { isMobile } }) => isMobile ? 'none' : 'flex' };
-  background-color: ${({ theme: { color } }) => color.veryLightGray };
-  padding: ${({ theme: { length } }) => length.medium };
+  flex: 3;
+  flex-direction: column;
+  background-color: ${({ theme }) => theme.lightGray };
+  padding: ${({ theme }) => theme.medium };
 `;

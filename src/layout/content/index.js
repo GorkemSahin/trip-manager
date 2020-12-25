@@ -1,11 +1,11 @@
 import React from 'react';
-import { OuterDiv } from './styled';
+import { StyledDiv } from './styled';
 
 const Content = ({ children, ...rest }) => {
   return (
-    <OuterDiv { ...rest }>
+    <StyledDiv { ...rest }>
       { children }
-    </OuterDiv>
+    </StyledDiv>
   );
 };
 

@@ -1,16 +1,15 @@
 import styled from 'styled-components';
 
-// TODO extract common attributes
+// TODO overflow necessary?
 export const OuterDiv = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
+  flex: 1;
+  overflow: auto;
 `;
 
 export const InnerDiv = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
+  display: ${(p) => (p.theme.isMobile && !p.isOpen) ? 'none' : 'flex' };
+  flex: 6;
   flex-direction: column;
-  margin: ${({ theme: { length } }) => `0 ${ length.medium } 0 ${ length.medium }` };
+  margin: ${({ theme }) => `0 ${ theme.medium } 0 ${ theme.medium }` };
 `;

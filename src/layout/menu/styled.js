@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledDiv = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
-  background-color: ${({ theme }) => theme.white };
+  flex-direction: column;
+  padding: ${({ theme }) => theme.small } 0 ${({ theme }) => theme.small } 0;
 `;

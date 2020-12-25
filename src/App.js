@@ -1,23 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Layout from './layout';
-import theme from './contants/theme';
+import theme from './constants/theme';
+import Pages from './pages';
+import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { useWindowWidth } from '@react-hook/window-size';
+import { useMobile } from './hooks/';
 
 function App() {
-  const [isMobile, setIsMobile] = useState(false);
-  const width = useWindowWidth();
-
-  useEffect(() => {
-    setIsMobile(width < theme.length.mobileWidthLimit);
-  }, [width]);
-
-  console.log(isMobile);
-
+  const isMobile = useMobile();
   return (
     <ThemeProvider theme={{ isMobile, ...theme }}>
-      <Layout>
-      </Layout>
+      <BrowserRouter>
+        <Layout>
+          <Pages/>
+        </Layout>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

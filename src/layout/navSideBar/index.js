@@ -1,17 +1,26 @@
 import React from 'react';
-import { Logo } from '../../assets/icons';
-import { InnerDiv, OuterDiv } from './styled';
+import { Logo, Plus } from '../../assets/icons';
+import Button from '../../components/button';
+import Menu from '../menu';
+import { useHistory } from 'react-router-dom';
+import { StyledDiv } from './styled';
+import items from '../../constants/menuItems';
 
-const NavSideBar = ({ children, ...rest }) => {
+// TODO animate sidebar
+const NavSideBar = ({ ...rest }) => {
+  const history = useHistory();
+
   return (
-    <OuterDiv { ...rest }>
-      <InnerDiv>
-        <Logo style={{ alignSelf: 'center' }}/>
-        <h4>Some Link</h4>
-        <h4>Some Link</h4>
-        <h4>Some Link</h4>
-      </InnerDiv>
-    </OuterDiv>
+    <StyledDiv { ...rest }>
+      <Logo/>
+      <Button
+        primary
+        icon={ <Plus/> }
+        text={ 'New Trip' }
+        style={{ margin: '2em 0 1em 0', width: '100%' }}
+        onClick={() => history.push('/trip/new')}/>
+      <Menu items = { items }/>
+    </StyledDiv>
   );
 };
 

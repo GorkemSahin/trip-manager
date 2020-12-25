@@ -6,5 +6,6 @@ import { ReactComponent as Plus } from './svg/plus.svg';
 import { ReactComponent as Yes } from './svg/yes.svg';
 import { ReactComponent as Cross } from './svg/cross.svg';
 import { ReactComponent as Flag } from './svg/flags/Placeholder.svg';
+import { ReactComponent as Hamburger } from './svg/hamburger.svg';
 
-export { Clock, Edit, World, Logo, Plus, Yes, Flag, Cross };
+export { Clock, Edit, World, Logo, Plus, Yes, Flag, Cross, Hamburger };
