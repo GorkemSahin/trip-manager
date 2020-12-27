@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-export const StyledDiv = styled.div`
+const Form = styled.form`
   display: flex;
   flex: 1;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.white };
 `;
+
+export default Form;

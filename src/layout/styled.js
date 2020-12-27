@@ -9,7 +9,7 @@ export const OuterDiv = styled.div`
 
 export const InnerDiv = styled.div`
   display: ${(p) => (p.theme.isMobile && !p.isOpen) ? 'none' : 'flex' };
-  flex: 6;
+  flex: 9;
   flex-direction: column;
   margin: ${({ theme }) => `0 ${ theme.medium } 0 ${ theme.medium }` };
 `;

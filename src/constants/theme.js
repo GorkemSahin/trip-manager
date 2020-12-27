@@ -13,11 +13,13 @@ const theme = {
   black: '#1C252B',
   divider: '#F1F1F2',
   // padding, margin, distance sizes
+  verySmall: '0.5em',
   small: '1em',
   medium: '2em',
   large: '3em',
   // component sizes
   rowHeight: '5em',
+  inputHeight: '3em',
   buttonHeight: '3em',
   buttonWidth: '11em',
   // other styling
