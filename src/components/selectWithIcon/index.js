@@ -9,11 +9,10 @@ import {
   IconDiv
 } from './styled';
 
-const SelectWithIcon = ({ options, selected, onChange, defaultIcon, placeholder, ...rest }) => {
+const SelectWithIcon = ({ options, value, onChange, defaultIcon, placeholder, ...rest }) => {
   const [isOpen, setIsOpen] = useState(false);
   const blank = { value: null, label: placeholder || 'Select' };
-  const [choice, setChoice] = useState(selected ? options.find(o => o.value === selected) : blank);
-  const [ops] = useState([blank, ...options] || []);
+  const [choice, setChoice] = useState(value ? options.find(o => o.value === value) : blank);
   const toggling = () => setIsOpen(!isOpen);
 
   const onOptionClicked = option => () => {
@@ -36,7 +35,7 @@ const SelectWithIcon = ({ options, selected, onChange, defaultIcon, placeholder,
       {isOpen && (
         <DropDownListContainer>
           <DropDownList>
-            { ops.map(option => (
+            { options.map(option => (
               <ListItem onClick={onOptionClicked(option)} key={ option.value }>
                 {
                   (option.icon || defaultIcon) && <IconDiv>

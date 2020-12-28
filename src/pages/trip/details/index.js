@@ -20,9 +20,11 @@ const TripDetails = () => {
   const dispatch = useDispatch();
   const onSuccess = () => history.push('/trip');
   const onFail = () => console.log('Fail log from TRIP DETAILS');
-  const onSubmit = data => dispatch(actions.postTrip({ ...data, address: { ...data.address, country: data.address.country.label }, covid: data.covid === 'true' }, onSuccess, onFail));
+  const onSubmit = data => {
+    console.log(data);
+    dispatch(actions.postTrip({ ...data, covid: data.covid === 'true' }, onSuccess, onFail));
+  };
   const watchCovid = watch('covid');
-  console.log(watchCovid);
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
@@ -34,7 +36,7 @@ const TripDetails = () => {
           render={({ onChange, value }) => (
             <CountrySelector
               onChange={ onChange }
-              selected={ value }
+              value={ value }
             />
           )}
         />
@@ -46,9 +48,7 @@ const TripDetails = () => {
           name="start_date"
           render={({ onChange, value }) => (
             <DatePicker
-              dateFormat="yyyy-MM-dd"
               onChange={onChange}
-              selected={value}
             />
           )}
         />
@@ -58,9 +58,7 @@ const TripDetails = () => {
           name="end_date"
           render={({ onChange, value }) => (
             <DatePicker
-              dateFormat="yyyy-MM-dd"
               onChange={onChange}
-              selected={value}
             />
           )}
         />
@@ -84,8 +82,17 @@ const TripDetails = () => {
           <RadioButton name='covid' inputRef={register} title='No' value={ false }/>
         </RadioGroup>
         { watchCovid === 'true' && <CovidDiv>
-            <Label>Zip code</Label>
-            <TextInput name='address.zip' inputRef={register}/>
+          <Label>Date of receiving test results</Label>
+          <Controller
+            control={ control }
+            name="covid_test_date"
+            render={({ onChange, value }) => (
+              <DatePicker
+                onChange={onChange}
+                selected={value}
+              />
+            )}
+          />
           </CovidDiv>
         }
       </FieldDiv>

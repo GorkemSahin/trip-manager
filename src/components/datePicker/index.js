@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { StyledDatePicker } from './styled';
+/* eslint-disable no-unused-vars */
+import React from 'react';
+import Datetime from 'react-datetime';
+import './style.css';
 
-// TODO Is onchange neccessary here?
 const DatePicker = ({ ...rest }) => {
-  const [startDate, setStartDate] = useState(new Date());
-
   return (
-    <StyledDatePicker
-      selected={startDate}
-      onChange={date => setStartDate(date)}
+    <Datetime
+      dateFormat={ 'yyyy/MM/DD' }
+      timeFormat={ false }
+      closeOnSelect={ true }
       { ...rest }/>
   );
 };

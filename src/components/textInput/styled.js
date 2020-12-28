@@ -6,8 +6,8 @@ const StyledInput = styled.input`
   height: ${({ theme }) => theme.inputHeight };
   outline: none;
   padding-left: ${({ theme }) => theme.small };
-  margin-bottom: ${({ theme }) => theme.small };
   border: 1px solid ${({ theme }) => theme.darkGray };
+  margin-bottom: ${({ theme }) => theme.small };
 `;
 
 export default StyledInput;

@@ -21,7 +21,7 @@ const theme = {
   large: '3em',
   // component sizes
   rowHeight: '5em',
-  inputHeight: '3em',
+  inputHeight: '2.8em',
   buttonHeight: '3em',
   buttonWidth: '11em',
   horizontalTripHeight: '5em',
