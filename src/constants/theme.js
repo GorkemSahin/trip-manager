@@ -9,9 +9,11 @@ const theme = {
   gray: '#F6F6F5',
   darkGray: '#F1F1F2',
   veryDarkGray: '#76787B',
+  lightRed: '#FBEBE9',
   white: '#FFFFFF',
   black: '#1C252B',
   divider: '#F1F1F2',
+  lightText: '#97999B',
   // padding, margin, distance sizes
   verySmall: '0.5em',
   small: '1em',
@@ -22,6 +24,7 @@ const theme = {
   inputHeight: '3em',
   buttonHeight: '3em',
   buttonWidth: '11em',
+  horizontalTripHeight: '5em',
   // other styling
   borderRadius: '10px',
   lessTransparency: '0.8',

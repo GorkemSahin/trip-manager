@@ -1,4 +1,6 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import store from './appState';
 import Layout from './layout';
 import theme from './constants/theme';
 import Pages from './pages';
@@ -9,13 +11,15 @@ import { useMobile } from './hooks/';
 function App() {
   const isMobile = useMobile();
   return (
-    <ThemeProvider theme={{ isMobile, ...theme }}>
-      <BrowserRouter>
-        <Layout>
-          <Pages/>
-        </Layout>
-      </BrowserRouter>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={{ isMobile, ...theme }}>
+        <BrowserRouter>
+          <Layout>
+            <Pages/>
+          </Layout>
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>
   );
 }
 

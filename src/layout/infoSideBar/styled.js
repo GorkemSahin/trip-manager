@@ -6,4 +6,9 @@ export const StyledDiv = styled.div`
   flex-direction: column;
   background-color: ${({ theme }) => theme.lightGray };
   padding: ${({ theme }) => theme.medium };
+  position: sticky;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: scroll;
 `;

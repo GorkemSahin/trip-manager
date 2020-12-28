@@ -1,5 +1,5 @@
 import React from 'react';
-import { CircledWorld, Clock, Edit } from '../assets/icons';
+import { CircledWorld, Clock, Document } from '../assets/icons';
 
 const items = [
   {
@@ -9,7 +9,7 @@ const items = [
   },
   {
     title: 'Future feature',
-    icon: <Edit/>,
+    icon: <Document/>,
     disabled: true,
     to: '#'
   },

@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyledDiv } from './styled';
+import { StyledDiv, StyledH1 } from './styled';
 import { useTitle } from '../../hooks';
 
 const Header = ({ children, ...rest }) => {
   const title = useTitle();
   return (
     <StyledDiv { ...rest }>
-      <h1>{ title }</h1>
+      <StyledH1>{ title }</StyledH1>
     </StyledDiv>
   );
 };

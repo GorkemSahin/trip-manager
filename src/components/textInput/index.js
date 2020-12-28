@@ -3,7 +3,7 @@ import StyledInput from './styled';
 
 const TextInput = ({ children, inputRef, ...rest }) => {
   return (
-    <StyledInput type='text' ref={ inputRef } { ...rest }>
+    <StyledInput ref={ inputRef } { ...rest }>
       { children }
     </StyledInput>
   );

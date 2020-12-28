@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-const getColor = ({ primary, disabled, theme }, hovered) => {
-  return primary ? ((hovered && !disabled) ? theme.darkOrange : theme.orange) : theme.darkGray;
+const getColor = ({ primary, danger, disabled, theme }, hovered) => {
+  return primary ? ((hovered && !disabled) ? theme.darkOrange : theme.orange) : danger ? theme.lightRed : theme.darkGray;
 };
 
 export const BaseButton = styled.button`

@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { actions, selectors } from '../../../appState/trip';
+import Trip from '../../../components/trip';
 
 const TripList = () => {
+  const dispatch = useDispatch();
+  useEffect(() => dispatch(actions.fetchTrips()), []);
+  const trips = useSelector(selectors.allTripsSelector);
   return (
-    <h3>List</h3>
+    <div>
+      {
+        trips.map(trip => <Trip style={{ marginTop: '1em' }} key={ trip.id } trip={ trip }/>)
+      }
+    </div>
   );
 };
 

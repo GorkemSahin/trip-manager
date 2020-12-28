@@ -37,7 +37,7 @@ export const DropDownList = styled.ul`
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  height: 10em;
+  height: 15em;
   overflow: scroll;
   border-radius: ${({ theme }) => theme.borderRadius };
 `;

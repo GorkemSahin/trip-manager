@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyledDiv } from './styled';
 
+// TODO refactor
 const InfoSideBar = ({ ...rest }) => {
   return (
     <StyledDiv { ...rest }>
