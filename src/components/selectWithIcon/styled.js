@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { World, SelectorIcon } from '../../assets/icons';
+import { SelectorIcon } from '../../assets/icons';
 
 export const StyledDiv = styled.div`
   display: flex;
@@ -20,16 +20,21 @@ export const DropDownHeader = styled.div`
   border-radius: ${({ theme }) => theme.borderRadius };
   padding-left: ${({ theme }) => theme.small };
   height: ${({ theme }) => theme.inputHeight };
+  ${({ isOpen }) => isOpen ? 'border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;' : '' };
 `;
 
+// TODO fix dropdown list displaying over title and right side overflow
 export const DropDownListContainer = styled.div`
   display: flex;
   position: absolute;
+  top: ${({ theme }) => theme.inputHeight };
   flex-direction: column;
   width: 100%;
-  z-index: 100;
+  z-index: 50;
   border: 1px solid ${({ theme }) => theme.darkGray };
   border-radius: ${({ theme }) => theme.borderRadius };
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
   background-color:  ${({ theme }) => theme.white };
 `;
 
@@ -37,7 +42,7 @@ export const DropDownList = styled.ul`
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  height: 10em;
+  max-height: 14em;
   overflow: scroll;
   border-radius: ${({ theme }) => theme.borderRadius };
 `;
@@ -46,17 +51,17 @@ export const ListItem = styled.li`
   display: flex;
   flex-direction: row;
   list-style: none;
-  padding-left: ${({ theme }) => theme.small };
+  margin-left: ${({ theme }) => theme.small };
   border-bottom: 1px solid ${({ theme }) => theme.darkGray };
   height: ${({ theme }) => theme.inputHeight };
   align-items: center;
 `;
 
-export const StyledWorld = styled(World)`
-  margin-right: ${({ theme }) => theme.small };;
-`;
-
 export const StyledSelectorIcon = styled(SelectorIcon)`
   margin-left: auto;
-  margin-right: ${({ theme }) => theme.small };;
+  margin-right: ${({ theme }) => theme.small };
+`;
+
+export const IconDiv = styled.div`
+  margin-right: ${({ theme }) => theme.small };
 `;
