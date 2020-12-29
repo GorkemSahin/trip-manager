@@ -9,28 +9,32 @@ import {
 } from './styled';
 import Button from '../button';
 import { Edit, World, Trash } from '../../assets/icons';
+import { verbalDate } from '../../utils/helpers';
+import { useHistory } from 'react-router-dom';
 
-const Trip = ({ trip, ...rest }) => {
-  console.log(trip);
+const TripRow = ({ trip, ...rest }) => {
+  const history = useHistory();
   return (
     <OuterDiv { ...rest }>
       <World style={{ flex: 1, height: '100%', width: '100%', marginRight: '1em' }}/>
       <InfoDiv>
         <StyledDiv>
           <CountrySpan>{ trip.address.country }</CountrySpan>
-          <LightSpan>{ trip.start_date }</LightSpan>
+          <LightSpan>{ `${verbalDate(trip.start_date)} - ${verbalDate(trip.end_date)}` }</LightSpan>
         </StyledDiv>
         <StyledDiv>
           <span style={{ marginRight: '1em' }}>{ trip.company_name }</span>
-          <LightSpan>{ trip.address.street }</LightSpan>
+          <LightSpan>{ trip.street }</LightSpan>
         </StyledDiv>
       </InfoDiv>
       <ButtonsDiv>
-        <Button danger icon={ <Trash/> }></Button>
-        <Button icon={ <Edit/> }></Button>
+        <Button danger icon={ <Trash/> }/>
+        <Button
+          onClick={() => history.push(`/trip/${ trip.id }`, trip)}
+          icon={ <Edit/> }/>
       </ButtonsDiv>
     </OuterDiv>
   );
 };
 
-export default Trip;
+export default TripRow;

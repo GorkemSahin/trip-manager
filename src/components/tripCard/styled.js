@@ -2,23 +2,23 @@ import styled from 'styled-components';
 
 export const OuterDiv = styled.div`
   display: flex;
+  flex-direction: column;
   background-color:  ${({ theme }) => theme.lightGray };
   border-radius: ${({ theme }) => theme.borderRadius };
-  height: ${({ theme }) => theme.horizontalTripHeight };
   padding: ${({ theme }) => theme.small };
   margin-bottom: ${({ theme }) => theme.small };
 `;
 
-export const InfoDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 7;
-`;
-
 export const StyledDiv = styled.div`
   display: flex;
+  flex-direction: column;
   flex: 1;
-  align-items: center;
+  margin-bottom: ${({ theme }) => theme.small };
+`;
+
+export const TitleDiv = styled(StyledDiv)`
+  flex-direction: row;
+  margin-bottom:${({ theme }) => theme.medium };
 `;
 
 export const ButtonsDiv = styled.div`
@@ -35,4 +35,8 @@ export const CountrySpan = styled.h4`
 
 export const LightSpan = styled.span`
   color: ${({ theme }) => theme.lightText };
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-height: 15em;
 `;

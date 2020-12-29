@@ -1,28 +1,31 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
-import { actions } from '../../../appState/trip';
+import axios from '../../../utils/axios';
 import Button from '../../../components/button';
-import { CovidDiv, RadioGroup, FieldDiv, StyledForm } from './styled';
+import { CovidDiv, FieldDiv, StyledForm, StyledRadioGroup } from './styled';
 import { Yes } from '../../../assets/icons';
 import Label from '../../../components/label';
 import TextInput from '../../../components/textInput';
 import CountrySelector from '../../../containers/countrySelector';
 import DatePicker from '../../../components/datePicker';
 import RadioButton from '../../../components/radioButton';
+import { useParams, useLocation } from 'react-router-dom';
+import { numericDate } from '../../../utils/helpers';
 
 // TODO improve the way trip object is formed
-// TODO city shouldn't be a number
 const TripDetails = () => {
-  const history = useHistory();
-  const { register, control, handleSubmit, watch } = useForm();
-  const dispatch = useDispatch();
-  const onSuccess = () => history.push('/trip');
-  const onFail = () => console.log('Fail log from TRIP DETAILS');
-  const onSubmit = data => {
+  const { id } = useParams();
+  const { state } = useLocation();
+  console.log(state);
+  const { register, control, handleSubmit, watch } = useForm({ defaultValues: state });
+  const onSubmit = async (data) => {
     console.log(data);
-    dispatch(actions.postTrip({ ...data, covid: data.covid === 'true' }, onSuccess, onFail));
+    try {
+      await id ? axios.put(`trip/${id}`, data) : axios.post('trip', data);
+    } catch (e) {
+      console.log(e);
+    }
   };
   const watchCovid = watch('covid');
 
@@ -48,7 +51,8 @@ const TripDetails = () => {
           name="start_date"
           render={({ onChange, value }) => (
             <DatePicker
-              onChange={onChange}
+              onChange={ onChange}
+              initialValue={ value ? numericDate(value) : null }
             />
           )}
         />
@@ -58,38 +62,48 @@ const TripDetails = () => {
           name="end_date"
           render={({ onChange, value }) => (
             <DatePicker
-              onChange={onChange}
+              onChange={ onChange}
+              initialValue={ numericDate(value) }
             />
           )}
         />
       </FieldDiv>
       <FieldDiv>
         <Label>Company name</Label>
-        <TextInput name='company_name' inputRef={register}/>
+        <TextInput type='text' name='company_name' inputRef={register}/>
         <Label>City</Label>
-        <TextInput type='number' name='address.city' inputRef={register({ valueAsNumber: true })}/>
+        <TextInput type='text' name='address.city' inputRef={register}/>
         <Label>Street</Label>
-        <TextInput name='address.street' inputRef={register}/>
+        <TextInput type='text' name='address.street' inputRef={register}/>
         <Label>Street number</Label>
         <TextInput type='number' name='address.street_num' inputRef={register({ valueAsNumber: true })}/>
         <Label>Zip code</Label>
-        <TextInput name='address.zip' inputRef={register}/>
+        <TextInput type='text' name='address.zip' inputRef={register}/>
       </FieldDiv>
       <FieldDiv>
         <Label>Have you been recently tested for COVID-19?</Label>
-        <RadioGroup>
-          <RadioButton name='covid' inputRef={register} title='Yes' value={ true }/>
-          <RadioButton name='covid' inputRef={register} title='No' value={ false }/>
-        </RadioGroup>
-        { watchCovid === 'true' && <CovidDiv>
+        <Controller
+          control={ control }
+          name="covid"
+          render={({ onChange, value }) => (
+            <StyledRadioGroup
+              horizontal
+              value={ value.toString() }
+              onChange={(value) => onChange(value === 'true')}>
+              <RadioButton name='covid' label='Yes' value={ 'true' }/>
+              <RadioButton name='covid' label='No' value={ 'false' }/>
+          </StyledRadioGroup>
+          )}
+        />
+        { watchCovid && <CovidDiv>
           <Label>Date of receiving test results</Label>
           <Controller
             control={ control }
             name="covid_test_date"
             render={({ onChange, value }) => (
               <DatePicker
-                onChange={onChange}
-                selected={value}
+                onChange={ onChange}
+                initialValue={ numericDate(value) }
               />
             )}
           />

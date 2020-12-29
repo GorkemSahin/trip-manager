@@ -1,13 +1,15 @@
 import React from 'react';
-import { StyledRadioButton, StyledDiv } from './styled';
+import { StyledDiv, StyledRadioButton } from './styled';
+import theme from '../../constants/theme';
 
-const RadioButton = ({ title, style, inputRef, ...rest }) => {
+const RadioButton = ({ label, ...rest }) => {
   return (
-    <StyledDiv style={ style }>
-      <StyledRadioButton type='radio' ref={ inputRef } { ...rest }/>
-      <span>
-        { title }
-      </span>
+    <StyledDiv>
+      <StyledRadioButton
+        pointColor={ theme.black }
+        { ...rest }>
+        { label }
+    </StyledRadioButton>
     </StyledDiv>
   );
 };

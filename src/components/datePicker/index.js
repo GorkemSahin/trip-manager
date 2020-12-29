@@ -3,12 +3,14 @@ import React from 'react';
 import Datetime from 'react-datetime';
 import './style.css';
 
-const DatePicker = ({ ...rest }) => {
+const DatePicker = ({ onChange, ...rest }) => {
+  const formattedOnChange = moment => onChange(moment.toDate());
   return (
     <Datetime
-      dateFormat={ 'yyyy/MM/DD' }
+      dateFormat={ 'DD/MM/yyyy' }
       timeFormat={ false }
       closeOnSelect={ true }
+      onChange={ formattedOnChange }
       { ...rest }/>
   );
 };

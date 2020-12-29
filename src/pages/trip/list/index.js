@@ -1,16 +1,21 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { actions, selectors } from '../../../appState/trip';
-import Trip from '../../../components/trip';
+import React from 'react';
+import TripCard from '../../../components/tripCard';
+import TripRow from '../../../components/tripRow';
+import { useMobile, useTrips } from '../../../hooks';
 
 const TripList = () => {
-  const dispatch = useDispatch();
-  useEffect(() => dispatch(actions.fetchTrips()), []);
-  const trips = useSelector(selectors.allTripsSelector);
+  const { trips, error } = useTrips();
+  const isMobile = useMobile();
+
+  if (error) return <h1>Error...</h1>;
+  if (!trips) return <h1>Loading...</h1>;
+
   return (
     <div>
       {
-        trips.map(trip => <Trip style={{ marginTop: '1em' }} key={ trip.id } trip={ trip }/>)
+        trips.map(trip => (isMobile
+          ? <TripCard style={{ marginTop: '1em' }} key={ trip.id } trip={ trip }/>
+          : <TripRow style={{ marginTop: '1em' }} key={ trip.id } trip={ trip }/>))
       }
     </div>
   );

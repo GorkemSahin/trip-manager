@@ -1,25 +1,26 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { actions } from '../../appState/country';
 import { World } from '../../assets/icons';
 import SelectWithIcon from '../../components/selectWithIcon';
+import { useCountries } from '../../hooks';
 
-// TODO may use SWR here, Redux Saga seems like an overkill
+// TODO why loading doesn't update?
 const CountrySelector = ({ ...rest }) => {
-  const dispatch = useDispatch();
-  const [countries, setCountries] = useState([]);
-  useEffect(() => {
-    dispatch(actions.fetchCountries(setCountries));
-  }, []);
+  const { countries, error } = useCountries();
+  const [placeholder, setPlaceholder] = useState('Loading...');
 
-  const options = useMemo(() => countries.sort((c1, c2) => c1.label.localeCompare(c2.label)).map(c => ({
-    icon: <World/>, ...c
-  }), [countries]));
+  const options = useMemo(() => (countries
+    ? countries.sort((c1, c2) => c1.label.localeCompare(c2.label)).map(c => ({ icon: <World/>, ...c }))
+    : []), [countries]);
+
+  // TODO think about shortening it
+  useEffect(() => setPlaceholder(options.length > 0 ? 'Select a country' : error ? 'Error' : 'Loading...'),
+    [options, error]);
 
   return (
     <SelectWithIcon
       defaultIcon = { <World/> }
       options = { options }
+      placeholder = { placeholder }
       { ...rest }/>
   );
 };

@@ -1,64 +1,19 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import { Edit, World } from '../../assets/icons';
-import SelectWithIcon from '../../components/selectWithIcon';
-
-const options = [
-  {
-    icon: <World/>,
-    value: 'aw',
-    label: 'Netherlands'
-  },
-  {
-    value: 'gr',
-    label: 'Greece'
-  },
-  {
-    value: 'fr',
-    label: 'France'
-  },
-  {
-    icon: <World/>,
-    value: 'pt',
-    label: 'Portugal'
-  },
-  {
-    value: 'es',
-    label: 'Spain'
-  },
-  {
-    value: 'it',
-    label: 'Italy'
-  },
-  {
-    icon: <World/>,
-    value: 'sk',
-    label: 'Slovakia'
-  },
-  {
-    value: 'se',
-    label: 'Sweden'
-  },
-  {
-    value: 'cn',
-    label: 'China'
-  },
-  {
-    value: 'at',
-    label: 'Austria'
-  },
-  {
-    icon: <World/>,
-    value: 'uk',
-    label: 'United Kingdom'
-  }
-];
+import React from 'react';
+import { useTrip } from '../../hooks';
+import TripCard from '../../components/tripCard';
 
 const Experiment = () => {
-  const [country, setCountry] = useState();
-  console.log(country);
+  const { trips, error } = useTrip();
+
+  if (error) return <h1>Error...</h1>;
+  if (!trips) return <h1>Loading...</h1>;
+
   return (
-    <SelectWithIcon selected={ country } onChange={ setCountry } options={ options } defaultIcon={ <Edit/> }/>
+    <div>
+      {
+        trips.map(trip => <TripCard style={{ marginTop: '1em' }} key={ trip.id } trip={ trip }/>)
+      }
+    </div>
   );
 };
 

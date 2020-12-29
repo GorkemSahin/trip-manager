@@ -1,25 +1,26 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import store from './appState';
+import { SWRConfig } from 'swr';
 import Layout from './layout';
 import theme from './constants/theme';
 import Pages from './pages';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { useMobile } from './hooks/';
+import fetcher from './utils/swr';
 
 function App() {
   const isMobile = useMobile();
+
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={{ isMobile, ...theme }}>
+    <ThemeProvider theme={{ isMobile, ...theme }}>
+      <SWRConfig value={{ fetcher }}>
         <BrowserRouter>
           <Layout>
             <Pages/>
           </Layout>
         </BrowserRouter>
-      </ThemeProvider>
-    </Provider>
+      </SWRConfig>
+    </ThemeProvider>
   );
 }
 

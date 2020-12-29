@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Form from '../../../components/form';
+import { RadioGroup } from 'react-radio-buttons';
 
 export const StyledForm = styled(Form)`
   width: 100%;
@@ -19,9 +20,8 @@ export const FieldDiv = styled.div`
   padding: 0 ${({ theme }) => theme.small } 0 ${({ theme }) => theme.small };
 `;
 
-export const RadioGroup = styled.div`
-  display: flex;
-  flex-direction: row;
+export const StyledRadioGroup = styled(RadioGroup)`
+  margin-bottom: 1em;
 `;
 
 export const CovidDiv = styled(FieldDiv)`

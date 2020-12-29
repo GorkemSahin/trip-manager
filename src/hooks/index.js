@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import theme from '../constants/theme';
 import { useWindowWidth } from '@react-hook/window-size';
 import { useLocation } from 'react-router-dom';
+import useSWR from 'swr';
+import { COUNTRY, TRIP } from '../constants/env';
 
 export const useMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -33,4 +35,14 @@ export const useTitle = () => {
   }, [pathname]);
 
   return title;
+};
+
+export const useCountries = () => {
+  const { data, error } = useSWR(COUNTRY);
+  return { countries: data, error };
+};
+
+export const useTrips = () => {
+  const { data, error } = useSWR(TRIP);
+  return { trips: data, error };
 };

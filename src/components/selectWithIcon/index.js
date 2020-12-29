@@ -11,8 +11,8 @@ import {
 
 const SelectWithIcon = ({ options, value, onChange, defaultIcon, placeholder, ...rest }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const blank = { value: null, label: placeholder || 'Select' };
-  const [choice, setChoice] = useState(value ? options.find(o => o.value === value) : blank);
+  const [choice, setChoice] = useState(value && options.find(o => o.value === value));
+
   const toggling = () => setIsOpen(!isOpen);
 
   const onOptionClicked = option => () => {
@@ -21,12 +21,14 @@ const SelectWithIcon = ({ options, value, onChange, defaultIcon, placeholder, ..
     setIsOpen(false);
   };
 
+  // TODO ((choice && choice.icon) || defaultIcon) && <IconDiv> why doesn't it work?
+
   return (
     <StyledDiv { ...rest }>
       <DropDownHeader isOpen = { isOpen } onClick={ toggling }>
         {
-          (choice.icon || defaultIcon) && <IconDiv>
-            { choice.icon || defaultIcon }
+          ((choice) || defaultIcon) && <IconDiv>
+            { choice ? choice.icon : defaultIcon }
           </IconDiv>
         }
         { choice ? choice.label : placeholder }

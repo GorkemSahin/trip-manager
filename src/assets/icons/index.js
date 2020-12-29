@@ -11,5 +11,6 @@ import { ReactComponent as SelectorIcon } from './svg/selector.svg';
 import { ReactComponent as Edit } from './svg/edit.svg';
 import { ReactComponent as Trash } from './svg/trash.svg';
 import { ReactComponent as World } from './svg/flags/World.svg';
+import { ReactComponent as Next } from './svg/next.svg';
 
-export { Clock, Document, Edit, Trash, CircledWorld, Logo, Plus, Yes, Flag, Cross, Hamburger, SelectorIcon, World };
+export { Clock, Document, Edit, Trash, CircledWorld, Logo, Plus, Yes, Flag, Cross, Hamburger, SelectorIcon, World, Next };
