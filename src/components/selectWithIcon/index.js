@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useOuterClick } from 'react-outer-click';
 import {
   StyledDiv,
   DropDownHeader,
@@ -10,10 +11,13 @@ import {
 } from './styled';
 
 const SelectWithIcon = ({ options, value, onChange, defaultIcon, placeholder, ...rest }) => {
+  const ref = useRef();
   const [isOpen, setIsOpen] = useState(false);
-  const [choice, setChoice] = useState(value && options.find(o => o.value === value));
+  const [choice, setChoice] = useState();
 
-  const toggling = () => setIsOpen(!isOpen);
+  useEffect(() => setChoice(options.find(o => o.value === value)), [value]);
+
+  const toggle = () => setIsOpen(!isOpen);
 
   const onOptionClicked = option => () => {
     setChoice(option);
@@ -21,11 +25,13 @@ const SelectWithIcon = ({ options, value, onChange, defaultIcon, placeholder, ..
     setIsOpen(false);
   };
 
+  useOuterClick(ref, () => setIsOpen(false));
+
   // TODO ((choice && choice.icon) || defaultIcon) && <IconDiv> why doesn't it work?
 
   return (
-    <StyledDiv { ...rest }>
-      <DropDownHeader isOpen = { isOpen } onClick={ toggling }>
+    <StyledDiv ref={ref} { ...rest }>
+      <DropDownHeader isOpen = { isOpen } onClick={ toggle }>
         {
           ((choice) || defaultIcon) && <IconDiv>
             { choice ? choice.icon : defaultIcon }

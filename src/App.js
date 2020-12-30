@@ -6,13 +6,15 @@ import Pages from './pages';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { useMobile } from './hooks/';
-import fetcher from './utils/swr';
+import { fetcher } from './api';
+import GlobalStyle from './globalStyled';
 
 function App() {
   const isMobile = useMobile();
 
   return (
     <ThemeProvider theme={{ isMobile, ...theme }}>
+      <GlobalStyle/>
       <SWRConfig value={{ fetcher }}>
         <BrowserRouter>
           <Layout>

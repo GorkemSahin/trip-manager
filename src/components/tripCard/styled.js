@@ -19,6 +19,7 @@ export const StyledDiv = styled.div`
 export const TitleDiv = styled(StyledDiv)`
   flex-direction: row;
   margin-bottom:${({ theme }) => theme.medium };
+  align-items: center;
 `;
 
 export const ButtonsDiv = styled.div`

@@ -7,4 +7,5 @@ export const StyledDiv = styled.div`
   background-color: ${({ theme }) => theme.white };
   padding-left: ${({ theme }) => theme.large };
   padding-right: ${({ theme }) => theme.large };
+  overflow: scroll;
 `;

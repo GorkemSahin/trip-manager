@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import axios from '../../../utils/axios';
+import { api } from '../../../api';
 import Button from '../../../components/button';
 import { CovidDiv, FieldDiv, StyledForm, StyledRadioGroup } from './styled';
 import { Yes } from '../../../assets/icons';
@@ -10,19 +10,37 @@ import TextInput from '../../../components/textInput';
 import CountrySelector from '../../../containers/countrySelector';
 import DatePicker from '../../../components/datePicker';
 import RadioButton from '../../../components/radioButton';
-import { useParams, useLocation } from 'react-router-dom';
-import { numericDate } from '../../../utils/helpers';
+import { useParams, useLocation, useHistory } from 'react-router-dom';
+import { numericDate } from '../../../utils';
+import { mutate } from 'swr';
+import { useTrip } from '../../../hooks';
 
 // TODO improve the way trip object is formed
+// TODO validation
+// TODO skeleton while loading
 const TripDetails = () => {
+  const history = useHistory();
   const { id } = useParams();
-  const { state } = useLocation();
-  console.log(state);
-  const { register, control, handleSubmit, watch } = useForm({ defaultValues: state });
+  const [editable, setEditable] = useState(!id);
+  const { trip, error } = useTrip(id);
+  const { register, control, handleSubmit, watch, reset } = useForm();
+  useEffect(() => {
+    if (trip) {
+      reset(trip);
+      if (trip.start_date > new Date()) setEditable(true);
+    } else {
+      console.log('resetle..');
+      reset({ });
+    }
+  }, [trip]);
+
   const onSubmit = async (data) => {
     console.log(data);
     try {
-      await id ? axios.put(`trip/${id}`, data) : axios.post('trip', data);
+      await id ? api.put(`trip/${id}`, data) : api.post('trip', data);
+      history.push('/trip');
+      // TODO mutate
+      mutate('trip');
     } catch (e) {
       console.log(e);
     }
@@ -30,6 +48,7 @@ const TripDetails = () => {
   const watchCovid = watch('covid');
 
   return (
+    <div style={{ alignSelf: 'center' }}>
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <FieldDiv>
         <Label>Where do you want to go?</Label>
@@ -51,8 +70,8 @@ const TripDetails = () => {
           name="start_date"
           render={({ onChange, value }) => (
             <DatePicker
-              onChange={ onChange}
-              initialValue={ value ? numericDate(value) : null }
+              onChange={ onChange }
+              value={ value ? numericDate(value) : null }
             />
           )}
         />
@@ -62,8 +81,8 @@ const TripDetails = () => {
           name="end_date"
           render={({ onChange, value }) => (
             <DatePicker
-              onChange={ onChange}
-              initialValue={ numericDate(value) }
+              onChange={ onChange }
+              value={ value ? numericDate(value) : null }
             />
           )}
         />
@@ -87,11 +106,11 @@ const TripDetails = () => {
           name="covid"
           render={({ onChange, value }) => (
             <StyledRadioGroup
-              horizontal
-              value={ value.toString() }
-              onChange={(value) => onChange(value === 'true')}>
-              <RadioButton name='covid' label='Yes' value={ 'true' }/>
-              <RadioButton name='covid' label='No' value={ 'false' }/>
+              name='covid'
+              selectedValue={ value }
+              onChange={ onChange }>
+              <RadioButton label='Yes' value={ true }/>
+              <RadioButton label='No' value={ false }/>
           </StyledRadioGroup>
           )}
         />
@@ -103,7 +122,7 @@ const TripDetails = () => {
             render={({ onChange, value }) => (
               <DatePicker
                 onChange={ onChange}
-                initialValue={ numericDate(value) }
+                value={ value ? numericDate(value) : null }
               />
             )}
           />
@@ -113,6 +132,7 @@ const TripDetails = () => {
       <Button primary type='submit' text='Save' icon={ <Yes/> }>
       </Button>
     </StyledForm>
+    </div>
   );
 };
 

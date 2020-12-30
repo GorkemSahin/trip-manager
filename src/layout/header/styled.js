@@ -4,7 +4,7 @@ export const StyledDiv = styled.div`
   height: ${({ theme }) => theme.rowHeight };
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 99;
   width: 100%;
   display: flex;
   ${({ theme: { isMobile } }) => isMobile ? 'justify-content: center' : '' };

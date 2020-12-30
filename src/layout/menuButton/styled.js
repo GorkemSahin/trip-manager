@@ -4,7 +4,7 @@ import Button from '../../components/button';
 export const StyledButton = styled(Button)`
   display: ${({ theme: { isMobile } }) => isMobile ? 'flex' : 'none' };
   position: fixed;
-  top: 2em;
-  left: 2em;
-  z-index: 99;
+  top: 1em;
+  left: 1em;
+  z-index: 100;
 `;

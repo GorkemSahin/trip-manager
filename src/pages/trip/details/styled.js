@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import Form from '../../../components/form';
-import { RadioGroup } from 'react-radio-buttons';
+import { RadioGroup } from 'react-radio-group';
 
 export const StyledForm = styled(Form)`
+  display: flex;
+  flex: 1;
   width: 100%;
   max-width: 30em;
   margin: ${({ theme }) => theme.medium };;
@@ -21,6 +23,8 @@ export const FieldDiv = styled.div`
 `;
 
 export const StyledRadioGroup = styled(RadioGroup)`
+  display: flex;
+  flex-direction: row;
   margin-bottom: 1em;
 `;
 

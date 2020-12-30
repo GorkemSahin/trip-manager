@@ -33,6 +33,8 @@ export const IconButton = styled(BaseButton)`
 
 export const StyledText = styled.span`
   display: block;
+  outline: none;
+  background-color: transparent;
   color: ${(p) => p.primary ? p.theme.black : p.theme.veryDarkGray };
   ${ BaseButton }:hover & {
     ${(p) => p.disabled ? '' : `color: ${ p.theme.black }` };

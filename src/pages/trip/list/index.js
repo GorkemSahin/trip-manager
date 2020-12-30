@@ -3,6 +3,8 @@ import TripCard from '../../../components/tripCard';
 import TripRow from '../../../components/tripRow';
 import { useMobile, useTrips } from '../../../hooks';
 
+// TODO reliable refresh after a post or put
+// TODO skeleton while loading
 const TripList = () => {
   const { trips, error } = useTrips();
   const isMobile = useMobile();

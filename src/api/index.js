@@ -1,12 +1,11 @@
 import axios from 'axios';
 import { BASE_URL, TOKEN } from '../constants/env';
 
-// TODO maybe remove some headers later
-const instance = axios.create({
+export const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     Authorization: `bearer ${TOKEN}`
   }
 });
 
-export default instance;
+export const fetcher = (url) => api.get(url).then(res => res.data);

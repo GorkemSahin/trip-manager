@@ -9,17 +9,20 @@ import {
 } from './styled';
 import Button from '../button';
 import { World, Next } from '../../assets/icons';
-import { verbalDate } from '../../utils/helpers';
+import { verbalDate } from '../../utils';
 import { useHistory } from 'react-router-dom';
+import { useCountryVisuals } from '../../hooks';
 
 // TODO test ellipsis
 const TripCard = ({ trip, ...rest }) => {
   const history = useHistory();
+  const { label, Flag } = useCountryVisuals(trip.address.country);
+
   return (
     <OuterDiv { ...rest }>
       <TitleDiv>
-        <World style={{ height: '3em', width: '3em', marginRight: '1em' }}/>
-        <CountrySpan>{ trip.address.country }</CountrySpan>
+        <Flag style={{ height: '3em', width: '3em', marginRight: '1em' }}/>
+        <CountrySpan>{ label }</CountrySpan>
       </TitleDiv>
       <StyledDiv>
         <LightSpan>Company</LightSpan>
@@ -31,7 +34,7 @@ const TripCard = ({ trip, ...rest }) => {
       < LightSpan>{ `${verbalDate(trip.start_date)} - ${verbalDate(trip.end_date)}` }</LightSpan>
       </StyledDiv>
       <Button
-        onClick={() => history.push(`/trip/${ trip.id }`)}
+        onClick={() => history.push(`trip/${ trip.id }`, trip)}
         text={ 'View trip' }
         icon={ <Next/> }
         style={{ width: '100%' }}></Button>
