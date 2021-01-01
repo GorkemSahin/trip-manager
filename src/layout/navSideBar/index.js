@@ -14,7 +14,7 @@ const NavSideBar = ({ ...rest }) => {
     <StyledDiv { ...rest }>
       <Logo/>
       <Button
-        primary
+        mode='primary'
         icon={ <Plus/> }
         text={ 'New Trip' }
         style={{ margin: '2em 0 1em 0', width: '100%' }}

@@ -10,6 +10,7 @@ const theme = {
   darkGray: '#F1F1F2',
   veryDarkGray: '#76787B',
   lightRed: '#FBEBE9',
+  red: '#D33927',
   white: '#FFFFFF',
   black: '#1C252B',
   divider: '#F1F1F2',

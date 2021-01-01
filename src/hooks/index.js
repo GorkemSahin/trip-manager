@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import theme from '../constants/theme';
+import tripSchema from '../constants/tripSchema';
 import { useWindowWidth } from '@react-hook/window-size';
 import { useLocation } from 'react-router-dom';
 import useSWR from 'swr';
@@ -60,3 +61,32 @@ export const useCountryVisuals = (value) => {
   useEffect(() => countries && setLabel(countries.find(c => c.value === value).label), [countries, value]);
   return { label, Flag };
 };
+
+export const useTripValidation = () =>
+  useCallback(
+    async data => {
+      try {
+        const values = await tripSchema.validate(data, {
+          abortEarly: false
+        });
+        return {
+          values,
+          errors: {}
+        };
+      } catch (errors) {
+        return {
+          values: {},
+          errors: errors.inner.reduce(
+            (allErrors, currentError) => ({
+              ...allErrors,
+              [currentError.path]: {
+                type: currentError.type ?? 'validation',
+                message: currentError.message
+              }
+            }),
+            {}
+          )
+        };
+      }
+    }, [tripSchema]
+  );

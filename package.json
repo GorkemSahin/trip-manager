@@ -14,11 +14,10 @@
     "react-radio-group": "^3.0.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
-    "reselect": "^4.0.0",
     "styled-components": "^5.2.1",
     "styled-normalize": "^8.0.7",
-    "styled-reset": "^4.3.4",
-    "swr": "^0.3.11"
+    "swr": "^0.3.11",
+    "yup": "^0.32.8"
   },
   "scripts": {
     "start": "react-scripts start",

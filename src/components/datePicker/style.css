@@ -11,6 +11,7 @@
   border: none;
   outline: none;
   border-radius: 10px;
+  border: 1px solid #F1F1F2;
   height: 3em;
   width: 100%;
   padding-left: 1em;
@@ -44,7 +45,7 @@ tfoot {
   border: 1px solid #f9f9f9;
   top: 2em;
   width: 100%;
-  height: 400px;
+  height: 20em;
   border-radius: 0 0 10px 10px;
   border-top: 1px solid #F1F1F2;
   overflow: none;
@@ -64,12 +65,12 @@ tfoot {
 
 .rdtDays {
   flex: 1;
+  display: flex;
 }
 
 .rdtPicker table {
-  flex: 1;
-  width: 100%;
   height: 100%;
+  width: 100%;
 }
 .rdtPicker td,
 .rdtPicker th {

@@ -5,15 +5,15 @@ import { api } from '../../../api';
 import Button from '../../../components/button';
 import { CovidDiv, FieldDiv, StyledForm, StyledRadioGroup } from './styled';
 import { Yes } from '../../../assets/icons';
-import Label from '../../../components/label';
 import TextInput from '../../../components/textInput';
 import CountrySelector from '../../../containers/countrySelector';
 import DatePicker from '../../../components/datePicker';
 import RadioButton from '../../../components/radioButton';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
-import { numericDate } from '../../../utils';
+import { numericDate, tripSchema } from '../../../utils';
 import { mutate } from 'swr';
-import { useTrip } from '../../../hooks';
+import { useTrip, useTripValidation } from '../../../hooks';
+import Field from '../../../components/field';
 
 // TODO improve the way trip object is formed
 // TODO validation
@@ -23,7 +23,8 @@ const TripDetails = () => {
   const { id } = useParams();
   const [editable, setEditable] = useState(!id);
   const { trip, error } = useTrip(id);
-  const { register, control, handleSubmit, watch, reset } = useForm();
+  const resolver = useTripValidation();
+  const { register, control, handleSubmit, watch, reset, errors } = useForm({ resolver });
   useEffect(() => {
     if (trip) {
       reset(trip);
@@ -39,7 +40,7 @@ const TripDetails = () => {
     try {
       await id ? api.put(`trip/${id}`, data) : api.post('trip', data);
       history.push('/trip');
-      // TODO mutate
+      // TODO inject changes and mutate
       mutate('trip');
     } catch (e) {
       console.log(e);
@@ -48,88 +49,97 @@ const TripDetails = () => {
   const watchCovid = watch('covid');
 
   return (
-    <div style={{ alignSelf: 'center' }}>
+    <div style={{ display: 'flex', alignSelf: 'center' }}>
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <FieldDiv>
-        <Label>Where do you want to go?</Label>
-        <Controller
-          control={ control }
-          name="address.country"
-          render={({ onChange, value }) => (
-            <CountrySelector
-              onChange={ onChange }
-              value={ value }
-            />
-          )}
-        />
-      </FieldDiv>
-      <FieldDiv>
-        <Label>Start date</Label>
-        <Controller
-          control={ control }
-          name="start_date"
-          render={({ onChange, value }) => (
-            <DatePicker
-              onChange={ onChange }
-              value={ value ? numericDate(value) : null }
-            />
-          )}
-        />
-        <Label>End date</Label>
-        <Controller
-          control={ control }
-          name="end_date"
-          render={({ onChange, value }) => (
-            <DatePicker
-              onChange={ onChange }
-              value={ value ? numericDate(value) : null }
-            />
-          )}
-        />
-      </FieldDiv>
-      <FieldDiv>
-        <Label>Company name</Label>
-        <TextInput type='text' name='company_name' inputRef={register}/>
-        <Label>City</Label>
-        <TextInput type='text' name='address.city' inputRef={register}/>
-        <Label>Street</Label>
-        <TextInput type='text' name='address.street' inputRef={register}/>
-        <Label>Street number</Label>
-        <TextInput type='number' name='address.street_num' inputRef={register({ valueAsNumber: true })}/>
-        <Label>Zip code</Label>
-        <TextInput type='text' name='address.zip' inputRef={register}/>
-      </FieldDiv>
-      <FieldDiv>
-        <Label>Have you been recently tested for COVID-19?</Label>
-        <Controller
-          control={ control }
-          name="covid"
-          render={({ onChange, value }) => (
-            <StyledRadioGroup
-              name='covid'
-              selectedValue={ value }
-              onChange={ onChange }>
-              <RadioButton label='Yes' value={ true }/>
-              <RadioButton label='No' value={ false }/>
-          </StyledRadioGroup>
-          )}
-        />
-        { watchCovid && <CovidDiv>
-          <Label>Date of receiving test results</Label>
+        <Field label='Where do you want to go?' error={ errors['address.country'] }>
           <Controller
             control={ control }
-            name="covid_test_date"
+            name='address.country'
+            render={({ onChange, value }) => (
+              <CountrySelector
+                onChange={ onChange }
+                value={ value }
+              />
+            )}
+          />
+        </Field>
+      </FieldDiv>
+      <FieldDiv>
+        <Field label='Start date' error={ errors.start_date }>
+          <Controller
+            control={ control }
+            name="start_date"
             render={({ onChange, value }) => (
               <DatePicker
-                onChange={ onChange}
+                onChange={ onChange }
                 value={ value ? numericDate(value) : null }
               />
             )}
           />
-          </CovidDiv>
-        }
+        </Field>
+        <Field label='End date' error={ errors.end_date }>
+          <Controller
+            control={ control }
+            name="end_date"
+            render={({ onChange, value }) => (
+              <DatePicker
+                onChange={ onChange }
+                value={ value ? numericDate(value) : null }
+              />
+            )}
+          />
+        </Field>
       </FieldDiv>
-      <Button primary type='submit' text='Save' icon={ <Yes/> }>
+      <FieldDiv>
+        <Field label='Company name' error={ errors.company_name }>
+          <TextInput type='text' name='company_name' inputRef={register}/>
+        </Field>
+        <Field label='City' error={ errors['address.city'] }>
+          <TextInput type='text' name='address.city' inputRef={register}/>
+        </Field>
+        <Field label='Street' error={ errors['address.street'] }>
+          <TextInput type='text' name='address.street' inputRef={register}/>
+        </Field>
+        <Field label='Street number' error={ errors['address.street_num'] }>
+          <TextInput type='number' name='address.street_num' inputRef={register({ valueAsNumber: true })}/>
+        </Field>
+        <Field label='Zip code' error={ errors['address.zip'] }>
+          <TextInput type='text' name='address.zip' inputRef={register}/>
+        </Field>
+      </FieldDiv>
+      <FieldDiv>
+        <Field label='Have you been recently tested for COVID-19?' error={ errors.covid }>
+          <Controller
+            control={ control }
+            name="covid"
+            render={({ onChange, value }) => (
+              <StyledRadioGroup
+                name='covid'
+                selectedValue={ value }
+                onChange={ onChange }>
+                <RadioButton label='Yes' value={ true }/>
+                <RadioButton label='No' value={ false }/>
+            </StyledRadioGroup>
+            )}
+          />
+        </Field>
+        { watchCovid && <CovidDiv>
+          <Field label='Date of receiving test results' error={ errors.covid_test_date }>
+            <Controller
+              control={ control }
+              name="covid_test_date"
+              render={({ onChange, value }) => (
+                <DatePicker
+                  onChange={ onChange}
+                  value={ value ? numericDate(value) : null }
+                />
+              )}
+            />
+          </Field>
+        </CovidDiv> }
+      </FieldDiv>
+      <Button mode='primary' type='submit' text='Save' icon={ <Yes/> }>
       </Button>
     </StyledForm>
     </div>
