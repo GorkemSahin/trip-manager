@@ -7,7 +7,7 @@ const DatePicker = ({ onChange, ...rest }) => {
   const formattedOnChange = moment => onChange(moment.toDate());
   return (
     <Datetime
-      inputProps={{ readOnly: true }}
+      inputProps={{ readOnly: true, placeholder: 'dd/mm/yyyy' }}
       dateFormat={ 'DD/MM/yyyy' }
       timeFormat={ false }
       closeOnSelect={ true }

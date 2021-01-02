@@ -12,13 +12,6 @@ const GlobalStyle = createGlobalStyle`
     -moz-appearance: none;
   }
   ${({ theme }) => `
-    & div[mode='container'] {
-      display: flex;
-      background-color: ${ theme.gray }
-      border-radius: ${ theme.borderRadius }
-      margin-top: ${ theme.small }
-      padding: ${ theme.small }
-    }
     & label {
       font-weight: ${ theme.labelWeight };
       size: ${ theme.medium };
@@ -64,10 +57,13 @@ const GlobalStyle = createGlobalStyle`
         background-color: ${ theme.darkOrange };
       }
       :disabled {
-        background-color: ${ theme.black };
+        background-color: ${ theme.lightOrange };
       }
     }
-    & button[danger] {
+    & button [loading=*] {
+      background-color: ${ theme.lightOrange };
+    }
+    & button[mode="danger"] {
       background-color: ${ theme.lightRed };
       :hover {
         background-color: ${ theme.lightRed };
@@ -93,6 +89,20 @@ const GlobalStyle = createGlobalStyle`
       :checked {
         background-color: ${ theme.black };;
       }
+    }
+    & span, strong {
+      margin-bottom: 0.25em;
+    }
+    & span[mode='light'] {
+      color: ${ theme.veryDarkGray }
+    }
+    & strong {
+      font-weight: 900;
+      font-size: 1.1em;
+    }
+    ::placeholder {
+      color: ${ theme.lightText };
+      opacity: 50%;
     }
   `}
 `;

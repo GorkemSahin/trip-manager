@@ -9,7 +9,6 @@ import items from '../../constants/menuItems';
 // TODO animate sidebar
 const NavSideBar = ({ ...rest }) => {
   const history = useHistory();
-
   return (
     <StyledDiv { ...rest }>
       <Logo/>

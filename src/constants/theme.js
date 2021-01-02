@@ -1,6 +1,5 @@
 const theme = {
   // screens with a width lower than this value will be treated as a mobile device
-  mobileWidthLimit: 900,
   // colors
   lightOrange: '#F8D964',
   orange: '#F8D964',

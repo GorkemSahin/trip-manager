@@ -6,10 +6,8 @@ export const StyledDiv = styled.div`
   flex: 1;
   position:relative;
   flex-direction: column;
-  margin-bottom: padding-left: ${({ theme }) => theme.small };
 `;
 
-// TODO fix radius while open
 export const DropDownHeader = styled.div`
   display: flex;
   flex-direction: row;
@@ -22,6 +20,7 @@ export const DropDownHeader = styled.div`
   height: ${({ theme }) => theme.inputHeight };
   ${({ isOpen }) => isOpen ? 'border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;' : '' };
   margin-bottom: ${({ theme }) => theme.small };
+  width: 100%;
 `;
 
 // TODO fix dropdown list displaying over title and right side overflow

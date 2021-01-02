@@ -1,14 +1,16 @@
 import React from 'react';
 import { ButtonWithIcon, IconButton, StyledText } from './styled';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import Loader from 'react-loader-spinner';
 
-const Button = ({ text, icon, style, ...rest }) => {
+const Button = ({ text, icon, style, loading, disabled, ...rest }) => {
   const StyledButton = text ? ButtonWithIcon : IconButton;
   return (
-    <StyledButton style= { style } {...rest}>
+    <StyledButton disabled={ disabled || loading } style= { style } {...rest}>
       <StyledText { ...rest }>
         { text }
       </StyledText>
-      { icon }
+      { loading ? <Loader height={20} type='TailSpin' color='black'/> : icon }
     </StyledButton>
   );
 };

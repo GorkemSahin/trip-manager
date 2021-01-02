@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import {
   OuterDiv,
@@ -17,10 +18,11 @@ import { useCountryVisuals } from '../../hooks';
 const TripRow = ({ trip, ...rest }) => {
   const history = useHistory();
   const { label, Flag } = useCountryVisuals(trip.address.country);
+  const { address: { city, street, street_num } } = trip;
 
   return (
     <OuterDiv { ...rest }>
-      <Flag style={{ flex: 1, height: '100%', width: '100%', marginRight: '1em' }}/>
+      <Flag style={{ flex: 1, width: '100%', height: '100%', minWidth: '5em', marginRight: '1em' }}/>
       <InfoDiv>
         <StyledDiv>
           <CountrySpan>{ label }</CountrySpan>
@@ -28,11 +30,11 @@ const TripRow = ({ trip, ...rest }) => {
         </StyledDiv>
         <StyledDiv>
           <span style={{ marginRight: '1em' }}>{ trip.company_name }</span>
-          <LightSpan>{ trip.address.street }</LightSpan>
+          <LightSpan>{ `${city}, ${street}, ${street_num}` }</LightSpan>
         </StyledDiv>
       </InfoDiv>
       <ButtonsDiv>
-        <Button danger icon={ <Trash/> }/>
+        <Button mode='danger' icon={ <Trash/> }/>
         <Button
           onClick={() => history.push(`/trip/${ trip.id }`, trip)}
           icon={ <Edit/> }/>

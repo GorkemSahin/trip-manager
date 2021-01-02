@@ -40,7 +40,7 @@ const SelectWithIcon = ({ options, value, onChange, defaultIcon, placeholder, ..
         { choice ? choice.label : placeholder }
         <StyledSelectorIcon/>
       </DropDownHeader>
-      {isOpen && (
+      { isOpen && (
         <DropDownListContainer>
           <DropDownList>
             { options.map(option => (

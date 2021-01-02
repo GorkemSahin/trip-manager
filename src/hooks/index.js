@@ -1,5 +1,4 @@
 import { useEffect, useState, useCallback } from 'react';
-import theme from '../constants/theme';
 import tripSchema from '../constants/tripSchema';
 import { useWindowWidth } from '@react-hook/window-size';
 import { useLocation } from 'react-router-dom';
@@ -7,15 +6,12 @@ import useSWR from 'swr';
 import { COUNTRY, TRIP } from '../constants/env';
 import { getFlag } from '../assets/icons';
 
-export const useMobile = () => {
-  const [isMobile, setIsMobile] = useState(false);
+export const useResponsiveness = () => {
   const width = useWindowWidth();
-
-  useEffect(() => {
-    setIsMobile(width < theme.mobileWidthLimit);
-  }, [width]);
-
-  return isMobile;
+  return {
+    isMobile: width < 800,
+    hideInfoSideBar: width < 1000
+  };
 };
 
 export const useTitle = () => {
@@ -28,10 +24,10 @@ export const useTitle = () => {
         setTitle('Your trips');
         break;
       case '/trip/new':
-        setTitle('Trip details');
+        setTitle('New trip');
         break;
       default:
-        setTitle('Trip Manager');
+        setTitle('View trip');
         break;
     }
   }, [pathname]);
@@ -51,6 +47,7 @@ export const useTrip = (id) => {
 
 export const useTrips = () => {
   const { data, error } = useSWR(TRIP);
+  console.log('...fetching...');
   return { trips: data, error };
 };
 
@@ -58,7 +55,7 @@ export const useCountryVisuals = (value) => {
   const { countries } = useCountries();
   const [label, setLabel] = useState(value);
   const Flag = getFlag(value);
-  useEffect(() => countries && setLabel(countries.find(c => c.value === value).label), [countries, value]);
+  useEffect(() => (countries && value) && setLabel(countries.find(c => c.value === value).label), [countries, value]);
   return { label, Flag };
 };
 

@@ -1,43 +1,32 @@
 import styled from 'styled-components';
+import Container from '../container';
 
-export const OuterDiv = styled.div`
-  display: flex;
-  background-color:  ${({ theme }) => theme.lightGray };
-  border-radius: ${({ theme }) => theme.borderRadius };
+export const OuterDiv = styled(Container)`
   height: ${({ theme }) => theme.horizontalTripHeight };
-  padding: ${({ theme }) => theme.small };
   margin-bottom: ${({ theme }) => theme.small };
+  padding: ${({ theme }) => theme.small };
 `;
 
 export const InfoDiv = styled.div`
   display: flex;
   flex-direction: column;
   flex: 7;
+  overflow: hidden;
 `;
 
 export const StyledDiv = styled.div`
   display: flex;
   flex: 1;
   align-items: center;
-  overflow: hidden;
-`;
-
-export const StyledEllipsis = styled.div`
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: ${({ theme }) => theme.lightText };
-  white-space: nowrap;
-  max-width: 20em;
-  display: block;
-  display: inline-grid;
 `;
 
 export const ButtonsDiv = styled.div`
   display: flex;
   flex: 2;
   align-items: center;
+  margin-left: ${({ theme }) => theme.small };
   justify-content: space-around;
+  min-width: 7em;
 `;
 
 export const CountrySpan = styled.h4`
@@ -50,5 +39,5 @@ export const LightSpan = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 10em;
+  max-width: 100%;
 `;

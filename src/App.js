@@ -5,12 +5,12 @@ import theme from './constants/theme';
 import Pages from './pages';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { useMobile } from './hooks/';
+import { useResponsiveness } from './hooks/';
 import { fetcher } from './api';
 import GlobalStyle from './globalStyled';
 
 function App() {
-  const isMobile = useMobile();
+  const { isMobile } = useResponsiveness();
 
   return (
     <ThemeProvider theme={{ isMobile, ...theme }}>
