@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyledButton } from './styled';
-import { Hamburger } from '../../assets/icons';
+import { Cross, Hamburger } from '../../assets/icons';
 
 // TODO animate button
-const MenuButton = ({ children, ...rest }) => {
+const MenuButton = ({ sideBarOpen, ...rest }) => {
   return (
-    <StyledButton icon={ <Hamburger/> } {...rest}/>
+    <StyledButton icon={ sideBarOpen ? <Cross/> : <Hamburger/> } {...rest}/>
   );
 };
 

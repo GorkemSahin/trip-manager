@@ -10,6 +10,7 @@ import { ReactComponent as SelectorIcon } from './svg/selector.svg';
 import { ReactComponent as Edit } from './svg/edit.svg';
 import { ReactComponent as Trash } from './svg/trash.svg';
 import { ReactComponent as Next } from './svg/next.svg';
+import { ReactComponent as Sad } from './svg/error.svg';
 import { ReactComponent as World } from './svg/flags/World.svg';
 import { ReactComponent as Placeholder } from './svg/flags/Placeholder.svg';
 
@@ -31,4 +32,20 @@ export const getFlag = (value) => {
   return flags[value] || Placeholder;
 };
 
-export { Clock, Document, Edit, Trash, CircledWorld, Logo, Plus, Yes, Cross, Hamburger, SelectorIcon, World, Next, flags };
+export {
+  Clock,
+  Document,
+  Edit,
+  Trash,
+  CircledWorld,
+  Logo,
+  Plus,
+  Yes,
+  Cross,
+  Hamburger,
+  SelectorIcon,
+  World,
+  Next,
+  flags,
+  Sad
+};

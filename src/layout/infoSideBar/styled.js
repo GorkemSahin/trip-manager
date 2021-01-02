@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledDiv = styled.div`
   display: ${({ hide }) => hide ? 'none' : 'flex' };
   flex: 3;
-  padding: 0 ${({ theme }) => theme.medium } 0 ${({ theme }) => theme.medium };
+  padding: ${({ theme }) => theme.medium };
   position: sticky;
   top: 0;
   right: 0;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Form from '../../components/form';
+import Form from '../../../components/form';
 import { RadioGroup } from 'react-radio-group';
-import Container from '../../components/container';
+import Container from '../../../components/container';
 
 export const StyledForm = styled(Form)`
   display: flex;

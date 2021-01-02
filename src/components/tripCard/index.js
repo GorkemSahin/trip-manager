@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable camelcase */
 import React from 'react';
 import {
   OuterDiv,
@@ -7,16 +7,17 @@ import {
   TitleDiv
 } from './styled';
 import Button from '../button';
-import { World, Next } from '../../assets/icons';
+import { Edit, Next } from '../../assets/icons';
 import { verbalDate } from '../../utils';
 import { useHistory } from 'react-router-dom';
 import { useCountryVisuals } from '../../hooks';
-import { TRIP } from '../../constants/env';
 
 // TODO test ellipsis
 const TripCard = ({ trip, ...rest }) => {
   const history = useHistory();
   const { label, Flag } = useCountryVisuals(trip?.address?.country);
+  const { address: { city, street, street_num, zip } } = trip;
+  const editable = new Date(trip.start_date) > new Date();
 
   return (trip
     ? <OuterDiv { ...rest }>
@@ -27,16 +28,16 @@ const TripCard = ({ trip, ...rest }) => {
       <Section>
         <span mode='light'>Company</span>
         <strong mode='heavy'>{ trip.company_name }</strong>
-        <span>{ trip.address.street }</span>
+        <span>{ `${street}, ${street_num}, ${zip}, ${city}` }</span>
       </Section>
       <Section>
         <span mode='light'>Date</span>
         <span>{ `${verbalDate(trip.start_date)} - ${verbalDate(trip.end_date)}` }</span>
       </Section>
       <Button
-        onClick={() => history.push(`${TRIP}/${ trip.id }`, trip)}
-        text={ 'View trip' }
-        icon={ <Next/> }
+        onClick={() => history.push(`/trip/${ trip.id }`, trip)}
+        text={ editable ? 'Edit trip' : 'View trip' }
+        icon={ editable ? <Edit/> : <Next/> }
         style={{ width: '100%' }}></Button>
     </OuterDiv>
     : null

@@ -6,7 +6,6 @@ import { useHistory } from 'react-router-dom';
 import { StyledDiv } from './styled';
 import items from '../../constants/menuItems';
 
-// TODO animate sidebar
 const NavSideBar = ({ ...rest }) => {
   const history = useHistory();
   return (

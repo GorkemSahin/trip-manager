@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FieldSet } from '../../pages/trip/details/styled';
+import { FieldSet } from '../../containers/tripForm/styled';
 
 export const StyledDiv = styled.div`
   display: flex;

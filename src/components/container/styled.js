@@ -6,7 +6,7 @@ const StyledDiv = styled.div`
       background-color: ${ theme.lightGray };
       border-radius: ${ theme.borderRadius };
       margin-top: ${ theme.small };
-      padding: 0 ${ theme.small } 0 ${ theme.small };
+      padding: ${ theme.small };
   `}
 `;
 

@@ -1,23 +1,40 @@
-import React from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
+import Loading from '../../../components/loading';
 import TripCard from '../../../components/tripCard';
 import TripRow from '../../../components/tripRow';
 import { useResponsiveness, useTrips } from '../../../hooks';
+import { deleteTrip } from '../../../api';
+import Error from '../../../components/placeholders/error';
+import { useLocation } from 'react-router-dom';
 
-// TODO reliable refresh after a post or put
-// TODO skeleton while loading
 const TripList = () => {
-  const { trips, error } = useTrips();
+  const { trips, fetchError, mutate } = useTrips();
   const { isMobile } = useResponsiveness();
+  const { id, newTrip } = useLocation();
+  const [error, setError] = useState();
 
-  if (error) return <h1>Error...</h1>;
-  if (!trips) return <h1>Loading...</h1>;
+  useEffect(() => {
+    (trips && newTrip) && mutate(id ? trips.map((trip) => trip.id === id ? newTrip : trip) : [...trips, newTrip]);
+  }, [id, newTrip]);
+
+  const onDelete = useCallback(async (id) => {
+    try {
+      await deleteTrip(id);
+      mutate(trips.filter(trip => trip.id !== id));
+    } catch (e) {
+      console.log(e);
+      setError(e);
+    }
+  }, [trips]);
+
+  if (error || fetchError) return <Error/>;
+  if (!trips) return <Loading/>;
 
   return (
     <div>
-      {
-        trips.map(trip => (isMobile
-          ? <TripCard style={{ marginTop: '1em' }} key={ trip.id } trip={ trip }/>
-          : <TripRow style={{ marginTop: '1em' }} key={ trip.id } trip={ trip }/>))
+      { trips.sort((t1, t2) => new Date(t2.start_date) - new Date(t1.start_date)).map(trip => (isMobile
+        ? <TripCard style={{ marginTop: '1em' }} key={ trip.id } trip={ trip }/>
+        : <TripRow onDelete= { onDelete } style={{ marginTop: '1em' }} key={ trip.id } trip={ trip }/>))
       }
     </div>
   );

@@ -9,16 +9,16 @@ import {
   CountrySpan
 } from './styled';
 import Button from '../button';
-import { Edit, Trash } from '../../assets/icons';
+import { Edit, Next, Trash } from '../../assets/icons';
 import { verbalDate } from '../../utils';
 import { useHistory } from 'react-router-dom';
 import { useCountryVisuals } from '../../hooks';
 
-// TODO display address properly
-const TripRow = ({ trip, ...rest }) => {
+// TODO fix company name overflow
+const TripRow = ({ trip, onDelete, ...rest }) => {
   const history = useHistory();
   const { label, Flag } = useCountryVisuals(trip.address.country);
-  const { address: { city, street, street_num } } = trip;
+  const { address: { city, street, street_num, zip } } = trip;
 
   return (
     <OuterDiv { ...rest }>
@@ -30,14 +30,17 @@ const TripRow = ({ trip, ...rest }) => {
         </StyledDiv>
         <StyledDiv>
           <span style={{ marginRight: '1em' }}>{ trip.company_name }</span>
-          <LightSpan>{ `${city}, ${street}, ${street_num}` }</LightSpan>
+          <LightSpan>{ `${street}, ${street_num}, ${zip}, ${city}` }</LightSpan>
         </StyledDiv>
       </InfoDiv>
       <ButtonsDiv>
-        <Button mode='danger' icon={ <Trash/> }/>
         <Button
-          onClick={() => history.push(`/trip/${ trip.id }`, trip)}
-          icon={ <Edit/> }/>
+          onClick={ () => onDelete(trip.id) }
+          mode='danger'
+          icon={ <Trash/> }/>
+        <Button
+          onClick={ () => history.push(`/trip/${ trip.id }`, trip) }
+          icon={ new Date(trip.start_date) > new Date() ? <Edit/> : <Next/> }/>
       </ButtonsDiv>
     </OuterDiv>
   );

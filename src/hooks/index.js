@@ -9,7 +9,7 @@ import { getFlag } from '../assets/icons';
 export const useResponsiveness = () => {
   const width = useWindowWidth();
   return {
-    isMobile: width < 800,
+    isMobile: width < 700,
     hideInfoSideBar: width < 1000
   };
 };
@@ -42,13 +42,12 @@ export const useCountries = () => {
 
 export const useTrip = (id) => {
   const { data, error } = useSWR(id ? `${TRIP}/${id}` : null);
-  return { trip: data, error };
+  return { trip: data, fetchError: error };
 };
 
 export const useTrips = () => {
-  const { data, error } = useSWR(TRIP);
-  console.log('...fetching...');
-  return { trips: data, error };
+  const { data, error, mutate } = useSWR(TRIP);
+  return { trips: data, fetchError: error, mutate };
 };
 
 export const useCountryVisuals = (value) => {

@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
 
   return (
     <OuterDiv>
-      <MenuButton onClick={ () => setSideBarOpen(!sideBarOpen) }/>
+      <MenuButton sideBarOpen={ sideBarOpen } onClick={ () => setSideBarOpen(!sideBarOpen) }/>
       <NavSideBar isOpen={ sideBarOpen }/>
       <InnerDiv isOpen={ !sideBarOpen }>
         <Header/>

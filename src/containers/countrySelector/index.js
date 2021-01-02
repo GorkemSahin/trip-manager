@@ -3,7 +3,6 @@ import { getFlag, World } from '../../assets/icons';
 import SelectWithIcon from '../../components/selectWithIcon';
 import { useCountries } from '../../hooks';
 
-// TODO animate loading
 const CountrySelector = ({ ...rest }) => {
   const { countries, error } = useCountries();
   const [placeholder, setPlaceholder] = useState('Loading...');
@@ -15,7 +14,6 @@ const CountrySelector = ({ ...rest }) => {
       })
     : []), [countries]);
 
-  // TODO think about shortening it
   useEffect(() => setPlaceholder(options.length > 0 ? 'Select a country' : error ? 'Error' : 'Loading...'),
     [options, error]);
 

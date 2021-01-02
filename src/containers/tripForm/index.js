@@ -1,31 +1,126 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { getFlag, World } from '../../assets/icons';
-import SelectWithIcon from '../../components/selectWithIcon';
-import { useCountries } from '../../hooks';
+import React, { useState, useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import Button from '../../components/button';
+import { CovidDiv, FieldSet, StyledForm, StyledRadioGroup } from './styled';
+import { Yes } from '../../assets/icons';
+import TextInput from '../../components/textInput';
+import CountrySelector from '../../containers/countrySelector';
+import DatePicker from '../../components/datePicker';
+import RadioButton from '../../components/radioButton';
+import { numericDate } from '../../utils';
+import { useTripValidation } from '../../hooks';
+import Field from '../../components/field';
 
-// TODO animate loading
-const CountrySelector = ({ ...rest }) => {
-  const { countries, error } = useCountries();
-  const [placeholder, setPlaceholder] = useState('Loading...');
+// TODO disable invalid dates on the datepickers
+// TODO eliminate missing default value warnings
+const TripForm = ({ trip, editable, onSubmit }) => {
+  const resolver = useTripValidation();
+  const { register, control, handleSubmit, watch, errors, reset } = useForm({ resolver });
+  const [isLoading, setIsLoading] = useState(false);
 
-  const options = useMemo(() => (countries
-    ? countries.sort((c1, c2) => c1.label.localeCompare(c2.label)).map(c => {
-        const Flag = getFlag(c.value);
-        return { icon: <Flag/>, ...c };
-      })
-    : []), [countries]);
+  useEffect(() => reset(trip), [trip]);
 
-  // TODO think about shortening it
-  useEffect(() => setPlaceholder(options.length > 0 ? 'Select a country' : error ? 'Error' : 'Loading...'),
-    [options, error]);
+  const submit = async (data) => {
+    setIsLoading(true);
+    await onSubmit(data);
+    setIsLoading(false);
+  };
+
+  const watchCovid = watch('covid');
 
   return (
-    <SelectWithIcon
-      defaultIcon = { <World/> }
-      options = { options }
-      placeholder = { placeholder }
-      { ...rest }/>
+    <StyledForm onSubmit={handleSubmit(submit)}>
+      <FieldSet disabled={ !editable || isLoading }>
+        <Field label='Where do you want to go?' error={ errors['address.country'] }>
+          <Controller
+            control={ control }
+            name='address.country'
+            render={({ onChange, value }) => (
+              <CountrySelector
+                onChange={ onChange }
+                value={ value }
+              />
+            )}
+          />
+        </Field>
+      </FieldSet>
+      <FieldSet disabled={ !editable || isLoading }>
+        <Field label='Start date' error={ errors.start_date }>
+          <Controller
+            control={ control }
+            name="start_date"
+            render={({ onChange, value }) => (
+              <DatePicker
+                onChange={ onChange }
+                value={ value ? numericDate(value) : null }
+              />
+            )}
+          />
+        </Field>
+        <Field label='End date' error={ errors.end_date }>
+          <Controller
+            control={ control }
+            name="end_date"
+            render={({ onChange, value }) => (
+              <DatePicker
+                onChange={ onChange }
+                value={ value ? numericDate(value) : null }
+              />
+            )}
+          />
+        </Field>
+      </FieldSet>
+      <FieldSet disabled={ !editable || isLoading }>
+        <Field label='Company name' error={ errors.company_name }>
+          <TextInput type='text' name='company_name' inputRef={register}/>
+        </Field>
+        <Field label='City' error={ errors['address.city'] }>
+          <TextInput type='text' name='address.city' inputRef={register}/>
+        </Field>
+        <Field label='Street' error={ errors['address.street'] }>
+          <TextInput type='text' name='address.street' inputRef={register}/>
+        </Field>
+        <Field label='Street number' error={ errors['address.street_num'] }>
+          <TextInput type='number' name='address.street_num' inputRef={register({ valueAsNumber: true })}/>
+        </Field>
+        <Field label='Zip code' error={ errors['address.zip'] }>
+          <TextInput type='text' name='address.zip' inputRef={register}/>
+        </Field>
+      </FieldSet>
+      <FieldSet disabled={ !editable || isLoading }>
+        <Field label='Have you been recently tested for COVID-19?' error={ errors.covid }>
+          <Controller
+            control={ control }
+            name="covid"
+            render={({ onChange, value }) => (
+              <StyledRadioGroup
+                name='covid'
+                selectedValue={ value }
+                onChange={ onChange }>
+                <RadioButton label='Yes' value={ true }/>
+                <RadioButton label='No' value={ false }/>
+            </StyledRadioGroup>
+            )}
+          />
+        </Field>
+        { watchCovid && <CovidDiv>
+          <Field label='Date of receiving test results' error={ errors.covid_test_date }>
+            <Controller
+              control={ control }
+              name="covid_test_date"
+              render={({ onChange, value }) => (
+                <DatePicker
+                  onChange={ onChange}
+                  value={ value ? numericDate(value) : null }
+                />
+              )}
+            />
+          </Field>
+        </CovidDiv> }
+      </FieldSet>
+      { editable && <Button loading={ isLoading } mode='primary' type='submit' text='Save' icon={ <Yes/> }/> }
+    </StyledForm>
   );
 };
 
-export default CountrySelector;
+export default TripForm;

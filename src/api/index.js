@@ -10,4 +10,8 @@ export const api = axios.create({
 
 export const fetcher = (url) => api.get(url).then(res => res.data);
 
-export const post = async (id, data) => await id ? api.put(`${TRIP}/${id}`, data) : api.post(TRIP, data);
+export const postTrip = async (data) => await api.post(TRIP, data);
+
+export const putTrip = async (id, data) => await api.put(`${TRIP}/${id}`, data);
+
+export const deleteTrip = async (id) => await api.delete(`${TRIP}/${id}`);

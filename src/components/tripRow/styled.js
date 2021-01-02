@@ -36,7 +36,7 @@ export const CountrySpan = styled.h4`
 
 export const LightSpan = styled.span`
   color: ${({ theme }) => theme.lightText };
-  overflow: hidden;
+  overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 100%;
