@@ -50,13 +50,13 @@ export const Address = styled.span`
 
 export const LightSpan = styled.span`
   color: ${({ theme }) => theme.lightText };
-  overflow-x: hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
 
 export const Company = styled.strong`
-  overflow-x: hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 100%;
