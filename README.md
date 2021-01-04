@@ -1,6 +1,6 @@
 # Trip Manager
 
-A web application to view, plan and manage business trips. Developed with React, React Router DOM, React Hook Form, Styled Components, SWR and Axios.
+A responsive web application to view, plan and manage business trips. Developed with React, React Router DOM, React Hook Form, Styled Components, SWR and Axios. A brief demonstration can be seen here: https://youtu.be/SGXrALCHoV8
 
 ## How to run
 
