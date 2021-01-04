@@ -9,3 +9,9 @@ export const StyledDiv = styled.div`
   padding-right: ${({ theme }) => theme.large };
   overflow: scroll;
 `;
+
+export const ScrollToTop = styled.div`
+  visibility: hidden;
+  width: 0px;
+  height: 0px;
+`;
