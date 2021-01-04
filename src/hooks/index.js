@@ -16,7 +16,7 @@ export const useResponsiveness = () => {
 
 export const useTitle = () => {
   const { pathname } = useLocation();
-  const [title, setTitle] = useState('Trip Manager');
+  const [title, setTitle] = useState();
 
   useEffect(() => {
     switch (pathname) {
@@ -41,8 +41,8 @@ export const useCountries = () => {
 };
 
 export const useTrip = (id) => {
-  const { data, error } = useSWR(id ? `${TRIP}/${id}` : null);
-  return { trip: data, fetchError: error };
+  const { data, error, mutate } = useSWR(`${TRIP}/${id}`);
+  return { trip: data, fetchError: error, mutate };
 };
 
 export const useTrips = () => {

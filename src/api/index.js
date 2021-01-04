@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { BASE_URL, TOKEN, TRIP } from '../constants/env';
 
-export const api = axios.create({
+const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     Authorization: `bearer ${TOKEN}`

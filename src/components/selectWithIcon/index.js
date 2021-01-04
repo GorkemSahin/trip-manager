@@ -10,6 +10,8 @@ import {
   IconDiv
 } from './styled';
 
+// NOTE: Wanted to code a reusable select component instead of using a library
+
 const SelectWithIcon = ({ options, value, onChange, defaultIcon, placeholder, ...rest }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [choice, setChoice] = useState();

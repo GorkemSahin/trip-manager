@@ -9,10 +9,14 @@ export const StyledDiv = styled.div`
   right: 0;
   bottom: 0;
   border-left: 2px solid ${({ theme }) => theme.divider };
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `;
 
 export const InnerDiv = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
+  max-width: 100%;
+  height: fit-content;
 `;

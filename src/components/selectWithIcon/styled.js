@@ -23,7 +23,6 @@ export const DropDownHeader = styled.div`
   width: 100%;
 `;
 
-// TODO fix right side overflow
 export const DropDownListContainer = styled.div`
   display: flex;
   position: absolute;

@@ -3,7 +3,15 @@ import { Sad } from '../../../assets/icons';
 
 const Error = ({ text, ...rest }) => {
   return (
-    <div style={{ display: 'flex', position: 'sticky', top: '33%', flexDirection: 'column', alignSelf: 'center', justifyContent: 'center' }}>
+    <div style={{
+      display: 'flex',
+      position: 'sticky',
+      top: '33%',
+      flexDirection:
+      'column',
+      alignSelf: 'center',
+      justifyContent: 'center'
+    }}>
       <Sad
         style={{ alignSelf: 'center', marginBottom: '1em' }}
         color='gray'

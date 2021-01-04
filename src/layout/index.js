@@ -11,11 +11,14 @@ const Layout = ({ children }) => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
 
   // Navigation sidebar will be closed when user navigates
-  useEffect(() => setSideBarOpen(false), [useLocation().key]);
+  const { key } = useLocation();
+  useEffect(() => setSideBarOpen(false), [key]);
 
   return (
     <OuterDiv>
-      <MenuButton sideBarOpen={ sideBarOpen } onClick={ () => setSideBarOpen(!sideBarOpen) }/>
+      <MenuButton
+        sideBarOpen={ sideBarOpen }
+        onClick={ () => setSideBarOpen(!sideBarOpen) }/>
       <NavSideBar isOpen={ sideBarOpen }/>
       <InnerDiv isOpen={ !sideBarOpen }>
         <Header/>

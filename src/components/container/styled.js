@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
+  display: flex;
   ${({ theme }) => `
-      display: flex;
       background-color: ${ theme.lightGray };
       border-radius: ${ theme.borderRadius };
       margin-top: ${ theme.small };

@@ -11,8 +11,6 @@ import { numericDate } from '../../utils';
 import { useTripValidation } from '../../hooks';
 import Field from '../../components/field';
 
-// TODO disable invalid dates on the datepickers
-// TODO eliminate missing default value warnings
 const TripForm = ({ trip, editable, onSubmit }) => {
   const resolver = useTripValidation();
   const { register, control, handleSubmit, watch, errors, reset } = useForm({ resolver });

@@ -5,7 +5,7 @@ const Field = ({ children, label, error, ...rest }) => {
   return (
     <StyledDiv error={ error } { ...rest }>
       <StyledLabel>{ label }</StyledLabel>
-      { error && <ErrorSpan>{ error.message } </ErrorSpan>}
+      { error && <ErrorSpan>{ error.message }</ErrorSpan>}
       { children }
     </StyledDiv>
   );

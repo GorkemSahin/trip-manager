@@ -5,21 +5,5 @@ html, body, #root, .App {
   font-family: 'Open Sans';
   display: flex;
   -webkit-overflow-scrolling: touch;
-  line-height: 1.5em;
-}
-
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-::-webkit-datetime-edit-year-field:not([aria-valuenow]),
-::-webkit-datetime-edit-month-field:not([aria-valuenow]),
-::-webkit-datetime-edit-day-field:not([aria-valuenow]) {
-    color: transparent;
-}
-
-fieldset {
-  border: none;
+  line-height: 1.3em;
 }

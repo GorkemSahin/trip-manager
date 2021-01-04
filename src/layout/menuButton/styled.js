@@ -7,6 +7,4 @@ export const StyledButton = styled(Button)`
   top: 1em;
   left: 1em;
   z-index: 100;
-  align-items: center;
-  justify-content: center;
 `;

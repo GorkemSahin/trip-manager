@@ -1,18 +1,20 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import Loading from '../../../components/loading';
-import TripCard from '../../../components/tripCard';
-import TripRow from '../../../components/tripRow';
-import { useResponsiveness, useTrips } from '../../../hooks';
+import Loading from '../../../components/placeholders/loading';
+import { useTrips } from '../../../hooks';
 import { deleteTrip } from '../../../api';
 import Error from '../../../components/placeholders/error';
 import { useLocation } from 'react-router-dom';
+import Trip from '../../../components/trip';
 
 const TripList = () => {
   const { trips, fetchError, mutate } = useTrips();
-  const { isMobile } = useResponsiveness();
-  const { id, newTrip } = useLocation();
   const [error, setError] = useState();
 
+  /*
+    Check if any props are passed via router. Update the locally cached
+    list accordingly and display the mutated list until the new list is fetched.
+  */
+  const { id, newTrip } = useLocation();
   useEffect(() => {
     (trips && newTrip) && mutate(id ? trips.map((trip) => trip.id === id ? newTrip : trip) : [...trips, newTrip]);
   }, [id, newTrip]);
@@ -22,7 +24,6 @@ const TripList = () => {
       await deleteTrip(id);
       mutate(trips.filter(trip => trip.id !== id));
     } catch (e) {
-      console.log(e);
       setError(e);
     }
   }, [trips]);
@@ -32,10 +33,9 @@ const TripList = () => {
 
   return (
     <div>
-      { trips.sort((t1, t2) => new Date(t2.start_date) - new Date(t1.start_date)).map(trip => (isMobile
-        ? <TripCard style={{ marginTop: '1em' }} key={ trip.id } trip={ trip }/>
-        : <TripRow onDelete= { onDelete } style={{ marginTop: '1em' }} key={ trip.id } trip={ trip }/>))
-      }
+      { trips.sort((t1, t2) => new Date(t2.start_date) - new Date(t1.start_date)).map(trip => (
+        <Trip onDelete={ onDelete } style={{ marginTop: '1em' }} key={ trip.id } trip={ trip }/>
+      ))}
     </div>
   );
 };

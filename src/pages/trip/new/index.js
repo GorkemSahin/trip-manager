@@ -11,10 +11,14 @@ const NewTrip = () => {
   const onSubmit = useCallback(async (data) => {
     try {
       await postTrip(data);
+      /*
+        So as long as an exception is not thrown and a 2XX HTTP response is acquired,
+        the second parameter here will be received by the TripList component to mutate
+        the locally cached data until the new list is fetched and cache is validated.
+      */
       history.push('/trip', { newTrip: data });
     } catch (e) {
-      console.log(e);
-      setError(true);
+      setError(e);
     }
   }, []);
 

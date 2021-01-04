@@ -1,9 +1,9 @@
+// To provide a centralized way to manage styling for the whole application
+
 const theme = {
-  // screens with a width lower than this value will be treated as a mobile device
-  // colors
-  lightOrange: '#F8D964',
-  orange: '#F8D964',
-  darkOrange: '#FEC527',
+  lightPrimary: '#F8D964',
+  primary: '#F8D964',
+  darkPrimary: '#FEC527',
   lightGray: '#F9F9FA',
   gray: '#F6F6F5',
   darkGray: '#F1F1F2',

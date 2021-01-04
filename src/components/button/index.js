@@ -6,11 +6,11 @@ import Loader from 'react-loader-spinner';
 const Button = ({ text, icon, style, loading, disabled, ...rest }) => {
   const StyledButton = text ? ButtonWithIcon : IconButton;
   return (
-    <StyledButton disabled={ disabled || loading } style= { style } {...rest}>
+    <StyledButton disabled={ disabled || loading } style= { style } { ...rest }>
       <StyledText { ...rest }>
         { text }
       </StyledText>
-      { loading ? <Loader height={20} type='TailSpin' color='black'/> : icon }
+      { loading ? <Loader width={ '1.3em' } height={ '1.3em' } type='TailSpin' color='black'/> : icon }
     </StyledButton>
   );
 };

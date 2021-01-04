@@ -6,9 +6,11 @@ export const StyledRadioButton = styled(Radio)`
 `;
 
 export const StyledDiv = styled.div`
-  background-color: ${({ theme }) => theme.darkGray };
-  border-radius: ${({ theme }) => theme.borderRadius };
-  color: ${({ theme }) => theme.black };
-  padding: ${({ theme }) => theme.small };
-  margin-right: ${({ theme }) => theme.small };
+  ${({ theme }) => `
+    background-color: ${ theme.darkGray };
+    border-radius: ${ theme.borderRadius };
+    color: ${ theme.black };
+    margin-right: ${ theme.small };
+    padding: ${ theme.small };
+  `}
 `;

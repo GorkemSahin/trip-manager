@@ -7,11 +7,14 @@ export const StyledDiv = styled.div`
   z-index: 99;
   width: 100%;
   display: flex;
+  align-items: center;
   ${({ theme: { isMobile } }) => isMobile ? 'justify-content: center' : '' };
   background-color: ${({ theme }) => theme.white };
   border-bottom: 2px solid ${({ theme }) => theme.divider };
 `;
 
 export const StyledH1 = styled.h1`
-  ${({ theme }) => !theme.isMobile && `margin-left: ${ theme.small }` };
-`;
+  font-weight: 400;
+  font-size: 1.5em;
+  ${({ theme }) => `${theme.isMobile ? 'margin-top:' : 'margin:'}  ${ theme.small }`}`
+;

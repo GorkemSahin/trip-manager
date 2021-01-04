@@ -11,6 +11,19 @@ const GlobalStyle = createGlobalStyle`
     -webkit-appearance: none;
     -moz-appearance: none;
   }
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  ::-webkit-datetime-edit-year-field:not([aria-valuenow]),
+  ::-webkit-datetime-edit-month-field:not([aria-valuenow]),
+  ::-webkit-datetime-edit-day-field:not([aria-valuenow]) {
+      color: transparent;
+  }
+  fieldset {
+    border: none;
+  }
   ${({ theme }) => `
     & label {
       font-weight: ${ theme.labelWeight };
@@ -23,6 +36,7 @@ const GlobalStyle = createGlobalStyle`
       display: flex;
       height: ${ theme.buttonHeight };
       align-items: center;
+      justify-content: center;
       border: none;
       background-color: ${ theme.darkGray };
       border-radius: ${ theme.borderRadius };
@@ -46,7 +60,7 @@ const GlobalStyle = createGlobalStyle`
       }
     }
     & button[mode="primary"] {
-      background-color: ${ theme.orange };
+      background-color: ${ theme.primary };
       > * {
         opacity: 100%;
       }
@@ -54,19 +68,22 @@ const GlobalStyle = createGlobalStyle`
         color: ${ theme.black };
       }
       :hover {
-        background-color: ${ theme.darkOrange };
+        background-color: ${ theme.darkPrimary };
       }
       :disabled {
-        background-color: ${ theme.lightOrange };
+        background-color: ${ theme.lightPrimary };
       }
     }
     & button [loading=*] {
-      background-color: ${ theme.lightOrange };
+      background-color: ${ theme.lightPrimary };
     }
     & button[mode="danger"] {
       background-color: ${ theme.lightRed };
       :hover {
         background-color: ${ theme.lightRed };
+      }
+      > * {
+        color: ${ theme.red };
       }
     }
     & input {
@@ -90,9 +107,6 @@ const GlobalStyle = createGlobalStyle`
         background-color: ${ theme.black };;
       }
     }
-    & span, strong {
-      margin-bottom: 0.25em;
-    }
     & span[mode='light'] {
       color: ${ theme.veryDarkGray }
     }
@@ -103,6 +117,17 @@ const GlobalStyle = createGlobalStyle`
     ::placeholder {
       color: ${ theme.lightText };
       opacity: 50%;
+    }
+    p {
+      color: #63666A;
+      font-weight: 400;
+      font-size: 0.8em;
+    }
+    h2 {
+      margin: 0px;
+      margin-bottom: ${ theme.small };
+      font-weight: 400;
+      font-size: 1.5em;
     }
   `}
 `;

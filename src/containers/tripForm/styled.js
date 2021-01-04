@@ -20,7 +20,7 @@ export const FieldSet = styled.fieldset`
     background-color: ${ theme.lightGray };
     border-radius: ${ theme.borderRadius };
     margin-bottom: ${ theme.small };
-    padding: 0 ${ theme.small } 0 ${ theme.small };
+    padding: 0 ${ theme.small };
   `}
 `;
 
@@ -36,6 +36,7 @@ export const CovidDiv = styled(Container)`
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
   padding: 0;
+  margin-top: 0;
 `;
 
 export const ErrorSpan = styled.span`

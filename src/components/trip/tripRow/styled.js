@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Container from '../container';
+import Container from '../../container';
 
 export const OuterDiv = styled(Container)`
   height: ${({ theme }) => theme.horizontalTripHeight };
@@ -14,7 +14,7 @@ export const InfoDiv = styled.div`
   overflow: hidden;
 `;
 
-export const StyledDiv = styled.div`
+export const Row = styled.div`
   display: flex;
   flex: 1;
   align-items: center;
@@ -29,7 +29,7 @@ export const ButtonsDiv = styled.div`
   min-width: 7em;
 `;
 
-export const CountrySpan = styled.h4`
+export const Country = styled.h4`
   margin: 0;
   margin-right: 1em;
 `;
@@ -39,5 +39,12 @@ export const LightSpan = styled.span`
   overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 100%;
+  max-width: 80%;
+`;
+
+export const Company = styled.span`
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 50%;
 `;

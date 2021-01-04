@@ -85,7 +85,7 @@ tfoot {
 .rdtPicker td.rdtMinute:hover,
 .rdtPicker td.rdtSecond:hover,
 .rdtPicker .rdtTimeToggle:hover {
-  background-color: #F6F6F5;
+  background-color: #F1F1F2;
   border-radius: 10px;
   cursor: pointer;
 }
@@ -151,6 +151,7 @@ td.rdtDay {
 }
 .rdtPicker th.rdtSwitch {
   width: 100px;
+  pointer-events: none;
 }
 .rdtPicker th.rdtNext,
 .rdtPicker th.rdtPrev {

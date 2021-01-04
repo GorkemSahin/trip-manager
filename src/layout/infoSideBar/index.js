@@ -2,11 +2,10 @@ import React from 'react';
 import Loading from '../../components/placeholders/loading';
 import Error from '../../components/placeholders/error';
 import Tips from '../../components/placeholders/tips';
-import TripCard from '../../components/tripCard';
 import { useResponsiveness, useTitle, useTrips } from '../../hooks';
 import { StyledDiv, InnerDiv } from './styled';
+import Trip from '../../components/trip';
 
-// TODO fix style
 const InfoSideBar = ({ ...rest }) => {
   const { hideInfoSideBar } = useResponsiveness();
   const title = useTitle();
@@ -18,15 +17,13 @@ const InfoSideBar = ({ ...rest }) => {
         title === 'Your trips'
           ? <Tips/>
           : <InnerDiv>
-            <h1>Your trips</h1>
-            <div style={{ alignSelf: 'center' }}>
+            <h2>Your trips</h2>
             { error
               ? <Error/>
               : !trips
                   ? <Loading/>
                   : trips.sort((t1, t2) => new Date(t2.start_date) - new Date(t1.start_date))
-                    .map(trip => <TripCard style={{ marginTop: '1em' }} key={ trip.id } trip={ trip }/>)}
-            </div>
+                    .map(trip => <Trip narrow key={ trip.id } trip={ trip } style={{ marginTop: '1em' }}/>)}
           </InnerDiv>
       }
     </StyledDiv>
