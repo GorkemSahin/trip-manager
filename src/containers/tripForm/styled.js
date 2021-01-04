@@ -8,7 +8,7 @@ export const StyledForm = styled(Form)`
   flex: 1;
   width: 100%;
   max-width: 30em;
-  margin: ${({ theme }) => theme.medium };
+  margin: ${({ theme }) => theme.medium } 0;
   align-self: center;
   align-items: center;
 `;

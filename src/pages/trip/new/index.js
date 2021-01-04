@@ -25,7 +25,7 @@ const NewTrip = () => {
   if (error) return <Error/>;
 
   return (
-    <div style={{ display: 'flex', alignSelf: 'center' }}>
+    <div style={{ display: 'flex', width: '100%', justifyContent: 'center', alignSelf: 'center' }}>
       <TripForm editable={ true } onSubmit={ onSubmit }/>
     </div>
   );

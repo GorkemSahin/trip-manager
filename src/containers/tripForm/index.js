@@ -27,6 +27,7 @@ const TripForm = ({ trip, editable, onSubmit }) => {
   const watchCovid = watch('covid');
 
   return (
+    <div>
     <StyledForm onSubmit={handleSubmit(submit)}>
       <FieldSet disabled={ !editable || isLoading }>
         <Field label='Where do you want to go?' error={ errors['address.country'] }>
@@ -118,6 +119,7 @@ const TripForm = ({ trip, editable, onSubmit }) => {
       </FieldSet>
       { editable && <Button loading={ isLoading } mode='primary' type='submit' text='Save' icon={ <Yes/> }/> }
     </StyledForm>
+    </div>
   );
 };
 

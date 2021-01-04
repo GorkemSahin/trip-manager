@@ -40,7 +40,7 @@ const TripDetails = () => {
   if (!trip) return <Loading/>;
 
   return (
-    <div style={{ display: 'flex', alignSelf: 'center' }}>
+    <div style={{ display: 'flex', width: '100%', justifyContent: 'center', alignSelf: 'center' }}>
       <TripForm trip={ trip } editable={ editable } onSubmit={ onSubmit }/>
     </div>
   );

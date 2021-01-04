@@ -42,7 +42,7 @@ export const CountryH2 = styled.h2`
 
 export const Address = styled.span`
   color: ${({ theme }) => theme.lightText };
-  overflow-x: hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 100%;
