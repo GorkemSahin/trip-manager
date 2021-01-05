@@ -8,7 +8,7 @@ import {
   Company,
   Address
 } from './styled';
-import Button from '../../button';
+import Button from '../../../components/button';
 import { Edit, Next } from '../../../assets/icons';
 import { useHistory } from 'react-router-dom';
 

@@ -1,16 +1,17 @@
 import { useEffect, useState, useCallback } from 'react';
-import tripSchema from '../constants/tripSchema';
 import { useWindowWidth } from '@react-hook/window-size';
 import { useLocation } from 'react-router-dom';
 import useSWR from 'swr';
 import { COUNTRY, TRIP } from '../constants/env';
 import { getFlag } from '../assets/icons';
+import { tripSchema, parseErrorSchema } from '../utils';
+import { transformToNestObject } from 'react-hook-form';
 
 export const useResponsiveness = () => {
   const width = useWindowWidth();
   return {
     isMobile: width < 700,
-    hideInfoSideBar: width < 1000
+    hideInfoSideBar: width < 1200
   };
 };
 
@@ -70,18 +71,11 @@ export const useTripValidation = () =>
           errors: {}
         };
       } catch (errors) {
+        const parsedErrors = parseErrorSchema(errors);
+        console.log(parsedErrors);
         return {
           values: {},
-          errors: errors.inner.reduce(
-            (allErrors, currentError) => ({
-              ...allErrors,
-              [currentError.path]: {
-                type: currentError.type ?? 'validation',
-                message: currentError.message
-              }
-            }),
-            {}
-          )
+          errors: transformToNestObject(parsedErrors)
         };
       }
     }, [tripSchema]

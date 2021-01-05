@@ -4,7 +4,7 @@ import Error from '../../components/placeholders/error';
 import Tips from '../../components/placeholders/tips';
 import { useResponsiveness, useTitle, useTrips } from '../../hooks';
 import { StyledDiv, InnerDiv } from './styled';
-import Trip from '../../components/trip';
+import Trip from '../../containers/trip';
 
 const InfoSideBar = ({ ...rest }) => {
   const { hideInfoSideBar } = useResponsiveness();

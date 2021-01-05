@@ -4,7 +4,7 @@ import { useTrips } from '../../../hooks';
 import { deleteTrip } from '../../../api';
 import Error from '../../../components/placeholders/error';
 import { useLocation } from 'react-router-dom';
-import Trip from '../../../components/trip';
+import Trip from '../../../containers/trip';
 
 const TripList = () => {
   const { trips, fetchError, mutate } = useTrips();

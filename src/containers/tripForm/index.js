@@ -30,7 +30,7 @@ const TripForm = ({ trip, editable, onSubmit }) => {
     <div>
     <StyledForm onSubmit={handleSubmit(submit)}>
       <FieldSet disabled={ !editable || isLoading }>
-        <Field label='Where do you want to go?' error={ errors['address.country'] }>
+        <Field label='Where do you want to go?' error={ errors.address?.country }>
           <Controller
             control={ control }
             name='address.country'
@@ -73,16 +73,16 @@ const TripForm = ({ trip, editable, onSubmit }) => {
         <Field label='Company name' error={ errors.company_name }>
           <TextInput type='text' name='company_name' inputRef={register}/>
         </Field>
-        <Field label='City' error={ errors['address.city'] }>
+        <Field label='City' error={ errors.address?.city }>
           <TextInput type='text' name='address.city' inputRef={register}/>
         </Field>
-        <Field label='Street' error={ errors['address.street'] }>
+        <Field label='Street' error={ errors.address?.street }>
           <TextInput type='text' name='address.street' inputRef={register}/>
         </Field>
-        <Field label='Street number' error={ errors['address.street_num'] }>
+        <Field label='Street number' error={ errors.address?.street_num }>
           <TextInput type='number' name='address.street_num' inputRef={register({ valueAsNumber: true })}/>
         </Field>
-        <Field label='Zip code' error={ errors['address.zip'] }>
+        <Field label='Zip code' error={ errors.address?.zip }>
           <TextInput type='text' name='address.zip' inputRef={register}/>
         </Field>
       </FieldSet>

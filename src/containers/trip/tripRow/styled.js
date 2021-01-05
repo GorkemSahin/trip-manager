@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Container from '../../container';
+import Container from '../../../components/container';
 
 export const OuterDiv = styled(Container)`
   height: ${({ theme }) => theme.horizontalTripHeight };
