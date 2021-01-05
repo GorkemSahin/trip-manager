@@ -10,6 +10,7 @@ export const OuterDiv = styled(Container)`
     margin-bottom: 0.25em;
   }
   height: 20em;
+  flex: 1;
 `;
 
 export const Section = styled.div`

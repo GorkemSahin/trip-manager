@@ -7,7 +7,6 @@ const Content = ({ children, ...rest }) => {
   const { key } = useLocation();
   const ref = useRef();
   useEffect(() => {
-    console.log('scroll...');
     ref.current.scrollIntoView();
   }, [key]);
 

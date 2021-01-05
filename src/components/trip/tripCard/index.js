@@ -19,7 +19,7 @@ const TripCard = ({ trip, editable, ...rest }) => {
   return (
     <OuterDiv { ...rest }>
       <TitleDiv>
-        <Flag style={{ height: '3em', width: '3em', marginRight: '1em' }}/>
+        <Flag style={{ height: '3.5em', width: '3.5em', marginRight: '1em' }}/>
         <CountryH2>{ country }</CountryH2>
       </TitleDiv>
       <Section>
