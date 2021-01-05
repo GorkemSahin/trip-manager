@@ -20,21 +20,21 @@ Application should be running at http://localhost:3000/.
 
 ## Known Issues
 
-* Nested fields (address.zip and address.country) do not get re-validated in real time after the initial submit attempt as intended due to what I think is a bug caused by react-hook-form. I debugged it using getValues and errors, both of which are acquired through the useForm() hook. Even though the values were updated, these changes were not reflected upon the nested fields' errors like they are for others. I also checked the useTripValidation hook and made sure the errors array it returned was updated correctly. I have already contacted the development team of react-hook-form and am waiting for their response. Please see: https://i.imgur.com/3zk5D2n.jpg
-* The datepicker library I used does not support popping above or belov the input field based on the current scroll position, which forces the user to scroll down or up before picking a date. I may replace it with another one later.
-* react-hook-form can't auto-scroll to controlled components without an actual input since it relies on onFocus. The dropdown selector I coded is not based on an <input/> element, so it can't be automatically scrolled to upon an error. The component can be re-designed (which would be better in terms of semantics as well) or a custom solution such as scrollToTop() can be implemented if more time is to be invested in this project.
+* Nested fields (address.zip and address.country) do not get re-validated in real time after the initial submit attempt as intended due to what I think is a bug caused by react-hook-form. I debugged it using getValues and errors, both of which are acquired through the useForm() hook. Even though the values were updated, these changes were not reflected upon the nested fields' errors like they were for other fields. I also checked the useTripValidation hook and made sure the errors array it returned was updated correctly. I have already contacted the development team of react-hook-form and am waiting for their response. Please see: https://i.imgur.com/3zk5D2n.jpg 
+* The datepicker library I used does not support popping above or below the input field based on the current scroll position, which forces the user to scroll down or up before picking a date. I may replace it with another one later.
+* react-hook-form can't auto-scroll to controlled components without an actual input since it relies on onFocus. The dropdown selector I coded is not based on an input element, so it can't be automatically scrolled to upon error. The component can be re-designed (which would be better in terms of semantics as well) or a custom solution such as scrollToTop() solution can be implemented if more time is to be invested in this project.
 
 ## Notes
 
-* This web application was developed using Google Chrome. I didn't do extensive testing with other browsers but I believe they'd do fine as well.
+* This web application was developed using Google Chrome. I didn't do extensive testing with all browsers but it looked fine on Safari, Mozilla and Edge as well.
 * Initially I wanted to get going with Redux, Saga, Reselect and Ant Design but Ant Design was too opinionated to reach the same look on the design guideline. I'd like to demonstrate app state management with a context provider, an async middleware and memoized selectors but for an application of this size those felt like an overkill, and you had already seen some of my previous work where I implemented these (mobile-movies-browser and currency-converter).
-* I had not worked with SWR, Styled Components or react-hook-form before, but since these were mentioned on the assignment paper, I thought now would be a good time to get some practice in with these tools. I read through the documentations and did some additional reading on how the community utilizes these tools, but I believe I may have missed out on some of the best practices due to my lack of experience with the mentioned libraries. This was also my first time coding a responsive website without using Bootstrap or Ant Design.
+* I had not worked with SWR, Styled Components or react-hook-form before, but since these were mentioned on the assignment paper, I thought now would be a good time to get some practice in with these tools. I read through the documentations and did some additional reading on how the design patterns embraced by their communities. These were great libraries and I'll definitely use them from now on.
 
 ## Modules and Components
 
 ### /api
 
-The default configuration consisting of a base URL and an authorization header for all API calls are implemented via Axios.
+The default configuration consisting of a base URL and an authorization header for all API calls are implemented via Axios. All fetch axions are executed through SWR and are cached for a snappy user experience. These caches get mutated and validated when POST, PUT or DELETE requests receive success responses.
 
 ### /assets
 
@@ -54,7 +54,7 @@ Styled and customized version of react-datetime.
 
 #### /field
 
-Enhances child input elements with a label and an error message. Also disables all pointer events and changes the background color of input elements if the parent <fieldset> is disabled.
+Enhances child input elements with a label and an error message. Also disables all pointer events and changes the background color of input elements if the parent fieldset is disabled.
 
 #### /placeholders
 
