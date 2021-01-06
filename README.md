@@ -21,19 +21,19 @@ Application should be running at http://localhost:3000/.
 ## Known Issues
 
 * The datepicker library I used does not support popping above or below the input field based on the current scroll position, which forces the user to scroll down or up before picking a date. I may replace it with another one later.
-* react-hook-form can't auto-scroll to controlled components without an actual input since it relies on onFocus. The dropdown selector I coded is not based on an input element, so it can't be automatically scrolled to upon error. The component can be re-designed (which would be better in terms of semantics as well) or a custom solution such as scrollToTop() solution can be implemented if more time is to be invested in this project.
+* Trip deletion has no visual feedback to indicate that the trip is being deleted, I may add some animated loading icon to the delete button or darken the background color during deletion later, if I decide to invest more time.
 
 ## Notes
 
 * This web application was developed using Google Chrome. I didn't do extensive testing with all browsers but it looked fine on Safari, Mozilla and Edge as well.
 * Initially I wanted to get going with Redux, Saga, Reselect and Ant Design but Ant Design was too opinionated to reach the same look on the design guideline. I'd like to demonstrate app state management with a context provider, an async middleware and memoized selectors but for an application of this size those felt like an overkill, and you had already seen some of my previous work where I implemented these (mobile-movies-browser and currency-converter).
-* I had not worked with SWR, Styled Components or react-hook-form before, but since these were mentioned on the assignment paper, I thought now would be a good time to get some practice in with these tools. I read through the documentations and did some additional reading on how the design patterns embraced by their communities. These were great libraries and I'll definitely use them from now on.
+* I had not worked with SWR, Styled Components or react-hook-form before, but since these were mentioned on the assignment paper, I thought now would be a good time to get some practice in with these tools. I read through the documentations and did some additional reading on the design patterns embraced by their communities. These were great libraries and I'll definitely use them from now on.
 
 ## Modules and Components
 
 ### /api
 
-The default configuration consisting of a base URL and an authorization header for all API calls are implemented via Axios. All fetch axions are executed through SWR and are cached for a snappy user experience. These caches get mutated and validated when POST, PUT or DELETE requests receive success responses.
+The default configuration consisting of a base URL and an authorization header for all API calls are implemented via Axios. All fetch actions are executed through SWR and are cached for a snappy user experience. These caches get mutated and validated when POST, PUT or DELETE requests receive 2XX success responses.
 
 ### /assets
 
@@ -73,11 +73,11 @@ Smart components that consist of multiple components and have relatively more re
 
 #### containers/countrySelector
 
-This container populates the aforementioned selectorWithIcon with countries and placeholders. Options are memoized since the calculation is costly. The list of countries were supposed to be fetched from the back-end but the icons were stored locally so I decided to code a small getFlag() util function at /assets/index.js. In a PROD env. I'd expect the flags to be served from the back-end as well and this would not be necessary.
+This container populates the aforementioned selectorWithIcon with countries and placeholders. Options are memoized since the calculation is costly. The list of countries are fetched from the back-end but the icons were stored locally so I decided to code a small getFlag() util function at /assets/index.js. In a PROD env. I'd expect the flags to be served from the back-end as well and this would not be necessary.
 
 #### containers/trip
 
-Serves as some sort of a high-order component (not exactly a HOC since it doesn't receive a component as prop) that returns a card or a row based on the device and props, and populates them with data.
+Serves as some sort of a high-order component (not exactly a HOC since it doesn't receive a component as prop) that returns a card or a row based on the device and props, and populates them with data. Same functionality could be achieved with a custom hook as well.
 
 #### containers/tripForm
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import Button from '../../components/button';
 import { CovidDiv, FieldSet, StyledForm, StyledRadioGroup } from './styled';
@@ -16,6 +16,10 @@ const TripForm = ({ trip, editable, onSubmit }) => {
   const { register, control, handleSubmit, watch, errors, reset } = useForm({ resolver });
   const [isLoading, setIsLoading] = useState(false);
 
+  // To be able to scroll to controlled components without an input element that can receive focus
+  const countryRef = useRef();
+  const datesRef = useRef();
+
   useEffect(() => reset(trip), [trip]);
 
   const submit = async (data) => {
@@ -29,11 +33,12 @@ const TripForm = ({ trip, editable, onSubmit }) => {
   return (
     <div>
     <StyledForm onSubmit={handleSubmit(submit)}>
-      <FieldSet disabled={ !editable || isLoading }>
+      <FieldSet ref={ countryRef } disabled={ !editable || isLoading }>
         <Field label='Where do you want to go?' error={ errors.address?.country }>
           <Controller
             control={ control }
             name='address.country'
+            onFocus={ () => countryRef.current.scrollIntoView() }
             render={({ onChange, value }) => (
               <CountrySelector
                 onChange={ onChange }
@@ -43,10 +48,11 @@ const TripForm = ({ trip, editable, onSubmit }) => {
           />
         </Field>
       </FieldSet>
-      <FieldSet disabled={ !editable || isLoading }>
+      <FieldSet ref={ datesRef } disabled={ !editable || isLoading }>
         <Field label='Start date' error={ errors.start_date }>
           <Controller
             control={ control }
+            onFocus={ () => datesRef.current.scrollIntoView() }
             name="start_date"
             render={({ onChange, value }) => (
               <DatePicker
@@ -60,6 +66,7 @@ const TripForm = ({ trip, editable, onSubmit }) => {
           <Controller
             control={ control }
             name="end_date"
+            onFocus={ () => datesRef.current.scrollIntoView() }
             render={({ onChange, value }) => (
               <DatePicker
                 onChange={ onChange }
