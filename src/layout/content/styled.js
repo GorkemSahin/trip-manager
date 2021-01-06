@@ -5,8 +5,7 @@ export const StyledDiv = styled.div`
   flex: 1;
   flex-direction: column;
   background-color: ${({ theme }) => theme.white };
-  padding-left: ${({ theme }) => theme.large };
-  padding-right: ${({ theme }) => theme.large };
+  padding: 0 ${({ theme }) => theme.isMobile ? theme.medium : theme.large };
   overflow: scroll;
 `;
 
