@@ -14,10 +14,12 @@ const TripList = () => {
     Check if any props are passed via router. Update the locally cached
     list accordingly and display the mutated list until the new list is fetched.
   */
-  const { state: { id, newTrip } } = useLocation();
+  const { state } = useLocation();
   useEffect(() => {
-    (trips && newTrip) && mutate(id ? trips.map((trip) => trip.id === id ? newTrip : trip) : [...trips, newTrip]);
-  }, [id, newTrip]);
+    (trips && state) && mutate(state.id
+      ? trips.map((trip) => trip.id === state.id ? state.newTrip : trip)
+      : [...trips, state.newTrip]);
+  }, [state]);
 
   const onDelete = useCallback(async (id) => {
     try {
