@@ -47,4 +47,5 @@ export const Company = styled.span`
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 50%;
+  margin-right: ${({ theme }) => theme.small }
 `;

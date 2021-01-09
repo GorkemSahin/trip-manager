@@ -14,7 +14,7 @@ const TripList = () => {
     Check if any props are passed via router. Update the locally cached
     list accordingly and display the mutated list until the new list is fetched.
   */
-  const { id, newTrip } = useLocation();
+  const { state: { id, newTrip } } = useLocation();
   useEffect(() => {
     (trips && newTrip) && mutate(id ? trips.map((trip) => trip.id === id ? newTrip : trip) : [...trips, newTrip]);
   }, [id, newTrip]);

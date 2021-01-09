@@ -25,7 +25,7 @@ const TripRow = ({ trip, editable, onDelete, ...rest }) => {
           <LightSpan>{ dates }</LightSpan>
         </Row>
         <Row>
-          <Company style={{ marginRight: '1em' }}>{ company }</Company>
+          <Company>{ company }</Company>
           <LightSpan>{ address }</LightSpan>
         </Row>
       </InfoDiv>
