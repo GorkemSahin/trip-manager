@@ -1,13 +1,13 @@
-import React from 'react';
-import { StyledDiv, StyledRadioButton } from './styled';
+import React from 'react'
+import { StyledDiv, StyledRadioButton } from './styled'
 
 const RadioButton = ({ label, ...rest }) => {
   return (
     <StyledDiv>
-      <StyledRadioButton { ...rest }/>
-      { label }
+      <StyledRadioButton {...rest} />
+      {label}
     </StyledDiv>
-  );
-};
+  )
+}
 
-export default RadioButton;
+export default RadioButton

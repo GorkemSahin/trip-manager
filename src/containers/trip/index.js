@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
-import React from 'react';
-import { verbalDate } from '../../utils';
-import { useCountryVisuals, useResponsiveness } from '../../hooks';
-import TripCard from './tripCard';
-import TripRow from './tripRow';
+import React from 'react'
+import { verbalDate } from '../../utils'
+import { useCountryVisuals, useResponsiveness } from '../../hooks'
+import TripCard from './tripCard'
+import TripRow from './tripRow'
 
 /*
   NOTE
@@ -15,26 +15,29 @@ import TripRow from './tripRow';
 */
 
 const Trip = ({ trip, narrow, ...rest }) => {
-  const { isMobile } = useResponsiveness();
-  const displayCard = narrow || isMobile;
-  const { label, Flag } = useCountryVisuals(trip.address.country);
-  const { address: { city, street, street_num, zip } } = trip;
-  const address = `${street}, ${street_num}, ${zip}, ${city}`;
-  const editable = new Date(trip.start_date) > new Date();
-  const dates = `${verbalDate(trip.start_date)} - ${verbalDate(trip.end_date)}`;
+  const { isMobile } = useResponsiveness()
+  const displayCard = narrow || isMobile
+  const { label, Flag } = useCountryVisuals(trip.address.country)
+  const {
+    address: { city, street, street_num, zip },
+  } = trip
+  const address = `${street}, ${street_num}, ${zip}, ${city}`
+  const editable = new Date(trip.start_date) > new Date()
+  const dates = `${verbalDate(trip.start_date)} - ${verbalDate(trip.end_date)}`
   const tripVisuals = {
     ...trip,
     Flag,
     country: label,
     address,
     dates,
-    company: trip.company_name
-  };
+    company: trip.company_name,
+  }
 
-  return (displayCard
-    ? <TripCard trip={ tripVisuals } editable={ editable } { ...rest }/>
-    : <TripRow trip={ tripVisuals } editable={ editable } { ...rest }/>
-  );
-};
+  return displayCard ? (
+    <TripCard trip={tripVisuals} editable={editable} {...rest} />
+  ) : (
+    <TripRow trip={tripVisuals} editable={editable} {...rest} />
+  )
+}
 
-export default Trip;
+export default Trip

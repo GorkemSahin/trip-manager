@@ -1,24 +1,24 @@
-import React from 'react';
-import { CircledWorld, Clock, Document } from '../assets/icons';
+import React from 'react'
+import { CircledWorld, Clock, Document } from '../assets/icons'
 
 const items = [
   {
     title: 'Your trips',
-    icon: <Clock/>,
-    to: '/trip'
+    icon: <Clock />,
+    to: '/trip',
   },
   {
     title: 'Future feature',
-    icon: <Document/>,
+    icon: <Document />,
     disabled: true,
-    to: '#'
+    to: '#',
   },
   {
     title: 'Future section',
-    icon: <CircledWorld/>,
+    icon: <CircledWorld />,
     disabled: true,
-    to: '#'
-  }
-];
+    to: '#',
+  },
+]
 
-export default items;
+export default items

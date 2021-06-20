@@ -1,0 +1,165 @@
+openapi: 3.0.0
+info:
+  title: Cleevio Frontend Task API
+  version: 1.0.1
+
+servers:
+  - url: https://task-devel.cleevio-vercel.vercel.app/api/
+
+components:
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+  schemas:
+    TripRequestShape:
+      type: object
+      required:
+        - start_date
+        - end_date
+        - company_name
+        - address
+        - covid
+      properties:
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        company_name:
+          type: string
+        address:
+          type: object
+          required:
+            - country
+            - zip
+          properties:
+            street:
+              type: string
+            street_num:
+              type: string
+            city:
+              type: string
+            country:
+              type: string
+            zip:
+              type: string
+        covid:
+          type: boolean
+        covid_test_date:
+          type: string
+          format: date
+    TripResponseShape:
+      allOf:
+        - type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
+        - $ref: "#/components/schemas/TripRequestShape"
+    TripEditResponseShape:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+
+security:
+  - bearer: []
+
+paths:
+  /country:
+    get:
+      summary: Get all countries
+      responses:
+        "200":
+          description: List of all countries fetched by API
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    value:
+                      type: string
+                    label:
+                      type: string
+  /trip:
+    get:
+      summary: List all saved trips
+      responses:
+        "200":
+          description: List of trips created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TripResponseShape"
+    post:
+      summary: Add a new trip
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TripRequestShape"
+      responses:
+        "200":
+          description: ID of the created trip
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TripEditResponseShape"
+  /trip/{id}:
+    get:
+      summary: Get a specific trip
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Retrieve a trip
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TripResponseShape"
+    put:
+      summary: Update trip information
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TripRequestShape"
+      responses:
+        "200":
+          description: Trip payload
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TripEditResponseShape"
+    delete:
+      summary: Delete a specific trip
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Trip successfully deleted

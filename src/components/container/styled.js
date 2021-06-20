@@ -1,13 +1,13 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const StyledDiv = styled.div`
   display: flex;
   ${({ theme }) => `
-      background-color: ${ theme.lightGray };
-      border-radius: ${ theme.borderRadius };
-      margin-top: ${ theme.small };
-      padding: ${ theme.small };
+      background-color: ${theme.lightGray};
+      border-radius: ${theme.borderRadius};
+      margin-top: ${theme.small};
+      padding: ${theme.small};
   `}
-`;
+`
 
-export default StyledDiv;
+export default StyledDiv

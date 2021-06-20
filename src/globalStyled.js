@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import { normalize } from 'styled-normalize';
+import { createGlobalStyle } from 'styled-components'
+import { normalize } from 'styled-normalize'
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -26,21 +26,21 @@ const GlobalStyle = createGlobalStyle`
   }
   ${({ theme }) => `
     & label {
-      font-weight: ${ theme.labelWeight };
-      size: ${ theme.medium };
+      font-weight: ${theme.labelWeight};
+      size: ${theme.medium};
     }
     & input, button {
-      height: ${ theme.medium };
+      height: ${theme.medium};
     }
     & button {
       display: flex;
-      height: ${ theme.buttonHeight };
+      height: ${theme.buttonHeight};
       align-items: center;
       justify-content: center;
       border: none;
-      background-color: ${ theme.darkGray };
-      border-radius: ${ theme.borderRadius };
-      padding: ${ theme.small };
+      background-color: ${theme.darkGray};
+      border-radius: ${theme.borderRadius};
+      padding: ${theme.small};
       > * {
         opacity: 60%;
       }
@@ -56,39 +56,39 @@ const GlobalStyle = createGlobalStyle`
         }
       }
       :disabled {
-        background-color: ${ theme.lightGray };
+        background-color: ${theme.lightGray};
       }
     }
     & button[mode="primary"] {
-      background-color: ${ theme.primary };
+      background-color: ${theme.primary};
       > * {
         opacity: 100%;
       }
       > span {
-        color: ${ theme.black };
+        color: ${theme.black};
       }
       :hover {
-        background-color: ${ theme.darkPrimary };
+        background-color: ${theme.darkPrimary};
       }
       :disabled {
-        background-color: ${ theme.lightPrimary };
+        background-color: ${theme.lightPrimary};
       }
     }
     & button [loading=*] {
-      background-color: ${ theme.lightPrimary };
+      background-color: ${theme.lightPrimary};
     }
     & button[mode="danger"] {
-      background-color: ${ theme.lightRed };
+      background-color: ${theme.lightRed};
       :hover {
-        background-color: ${ theme.lightRed };
+        background-color: ${theme.lightRed};
       }
       > * {
-        color: ${ theme.red };
+        color: ${theme.red};
       }
     }
     & input {
-      border: 1px solid ${ theme.darkGray };
-      background-color: ${ theme.white };
+      border: 1px solid ${theme.darkGray};
+      background-color: ${theme.white};
     }
     & input[type="radio"] {
       -webkit-appearance: none;
@@ -99,23 +99,23 @@ const GlobalStyle = createGlobalStyle`
       height: 15px;
       padding: 2px;
       background-clip: content-box;
-      border: 2px solid ${ theme.black };
-      background-color: ${ theme.white };
+      border: 2px solid ${theme.black};
+      background-color: ${theme.white};
       border-radius: 50%;
       outline: none;
       :checked {
-        background-color: ${ theme.black };;
+        background-color: ${theme.black};;
       }
     }
     & span[mode='light'] {
-      color: ${ theme.veryDarkGray }
+      color: ${theme.veryDarkGray}
     }
     & strong {
       font-weight: 900;
       font-size: 1.1em;
     }
     ::placeholder {
-      color: ${ theme.lightText };
+      color: ${theme.lightText};
       opacity: 50%;
     }
     p {
@@ -125,11 +125,11 @@ const GlobalStyle = createGlobalStyle`
     }
     h2 {
       margin: 0px;
-      margin-bottom: ${ theme.small };
+      margin-bottom: ${theme.small};
       font-weight: 400;
       font-size: 1.5em;
     }
   `}
-`;
+`
 
-export default GlobalStyle;
+export default GlobalStyle

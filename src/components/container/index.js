@@ -1,11 +1,8 @@
-import React from 'react';
-import StyledDiv from './styled';
+import React from 'react'
+import StyledDiv from './styled'
 
 const Container = ({ children, ...rest }) => {
-  return (
-    <StyledDiv { ...rest }>
-      { children }
-    </StyledDiv>);
-};
+  return <StyledDiv {...rest}>{children}</StyledDiv>
+}
 
-export default Container;
+export default Container

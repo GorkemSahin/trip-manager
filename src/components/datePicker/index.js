@@ -1,6 +1,6 @@
-import React from 'react';
-import Datetime from 'react-datetime';
-import './style.css';
+import React from 'react'
+import Datetime from 'react-datetime'
+import './style.css'
 
 /*
   NOTE
@@ -9,16 +9,17 @@ import './style.css';
 */
 
 const DatePicker = ({ onChange, ...rest }) => {
-  const formattedOnChange = moment => onChange(moment.toDate());
+  const formattedOnChange = (moment) => onChange(moment.toDate())
   return (
     <Datetime
       inputProps={{ readOnly: true, placeholder: 'dd/mm/yyyy' }}
-      dateFormat={ 'DD/MM/yyyy' }
-      timeFormat={ false }
-      closeOnSelect={ true }
-      onChange={ formattedOnChange }
-      { ...rest }/>
-  );
-};
+      dateFormat={'DD/MM/yyyy'}
+      timeFormat={false}
+      closeOnSelect={true}
+      onChange={formattedOnChange}
+      {...rest}
+    />
+  )
+}
 
-export default DatePicker;
+export default DatePicker

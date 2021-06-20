@@ -29,7 +29,7 @@ const theme = {
   borderRadius: '10px',
   lessTransparency: '0.8',
   transparency: '0.6',
-  moreTransparency: '0.4'
-};
+  moreTransparency: '0.4',
+}
 
-export default theme;
+export default theme
