@@ -1,4 +1,3 @@
-import React from 'react'
 import { ButtonWithIcon, IconButton, StyledText } from './styled'
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 import Loader from 'react-loader-spinner'
