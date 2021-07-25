@@ -29,12 +29,11 @@ const GlobalStyle = createGlobalStyle`
       font-weight: ${theme.labelWeight};
       size: ${theme.medium};
     }
-    & input, button {
+    & input {
       height: ${theme.medium};
     }
     & button {
       display: flex;
-      height: ${theme.buttonHeight};
       align-items: center;
       justify-content: center;
       border: none;

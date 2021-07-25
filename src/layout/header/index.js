@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyledDiv, StyledH1 } from './styled'
-import { useTitle } from '../../hooks'
+import { useTitle } from 'utils/hooks'
 
 const Header = ({ children, ...rest }) => {
   const title = useTitle()

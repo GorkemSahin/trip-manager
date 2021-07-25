@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useForm, Controller } from 'react-hook-form'
-import Button from '../../components/button'
+import { Button } from '../../components/button/Button'
 import { CovidDiv, FieldSet, StyledForm, StyledRadioGroup } from './styled'
 import { Yes } from '../../assets/icons'
 import TextInput from '../../components/textInput'
@@ -8,26 +8,25 @@ import CountrySelector from '../../containers/countrySelector'
 import DatePicker from '../../components/datePicker'
 import RadioButton from '../../components/radioButton'
 import { numericDate } from '../../utils'
-import { useTripValidation } from '../../hooks'
+import { useTripValidation } from 'utils/hooks'
 import Field from '../../components/field'
 
 const TripForm = ({ trip, editable, onSubmit }) => {
   const resolver = useTripValidation()
-  const { register, control, handleSubmit, watch, errors, reset } = useForm({
-    resolver,
-  })
-  const [isLoading, setIsLoading] = useState(false)
+  const { register, control, handleSubmit, watch, errors, reset, formState } =
+    useForm({
+      resolver,
+    })
+  const isLoading = formState.isSubmitting || formState.isValidating
 
   // To be able to scroll to controlled components without an input element that can receive focus
   const countryRef = useRef()
   const datesRef = useRef()
 
-  useEffect(() => reset(trip), [trip])
+  useEffect(() => reset(trip), [trip, reset])
 
   const submit = async (data) => {
-    setIsLoading(true)
     await onSubmit(data)
-    setIsLoading(false)
   }
 
   const watchCovid = watch('covid')
@@ -141,12 +140,13 @@ const TripForm = ({ trip, editable, onSubmit }) => {
         </FieldSet>
         {editable && (
           <Button
-            loading={isLoading}
+            icon={<Yes />}
+            isLoading={isLoading}
             mode="primary"
             type="submit"
-            text="Save"
-            icon={<Yes />}
-          />
+          >
+            Save
+          </Button>
         )}
       </StyledForm>
     </div>

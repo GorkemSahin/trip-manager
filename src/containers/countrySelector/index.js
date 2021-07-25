@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { getFlag, World } from '../../assets/icons'
 import SelectWithIcon from '../../components/selectWithIcon'
-import { useCountries } from '../../hooks'
+import { useCountries } from 'utils/hooks'
 
 /*
   NOTE

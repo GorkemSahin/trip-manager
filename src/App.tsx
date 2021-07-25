@@ -5,7 +5,7 @@ import theme from './constants/theme'
 import Pages from './pages'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
-import { useResponsiveness } from './hooks'
+import { useResponsiveness } from 'utils/hooks'
 import { fetcher } from './api'
 import GlobalStyle from './globalStyled'
 

@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react'
 import Loading from '../../../components/placeholders/loading'
-import { useTrips } from '../../../hooks'
+import { useTrips } from 'utils/hooks'
 import { deleteTrip } from '../../../api'
 import Error from '../../../components/placeholders/error'
 import { useLocation } from 'react-router-dom'

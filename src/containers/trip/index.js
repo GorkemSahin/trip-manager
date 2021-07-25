@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { verbalDate } from '../../utils'
-import { useCountryVisuals, useResponsiveness } from '../../hooks'
+import { useCountryVisuals, useResponsiveness } from 'utils/hooks'
 import TripCard from './tripCard'
 import TripRow from './tripRow'
 

@@ -8,7 +8,7 @@ import {
   Company,
   Address,
 } from './styled'
-import Button from '../../../components/button'
+import { Button } from '../../../components/button/Button'
 import { Edit, Next } from '../../../assets/icons'
 import { useHistory } from 'react-router-dom'
 
@@ -33,10 +33,11 @@ const TripCard = ({ trip, editable, ...rest }) => {
       </Section>
       <Button
         onClick={() => history.push(`/trip/${trip.id}`)}
-        text={editable ? 'Edit trip' : 'View trip'}
         icon={editable ? <Edit /> : <Next />}
         style={{ width: '100%' }}
-      ></Button>
+      >
+        {editable ? 'Edit trip' : 'View trip'}
+      </Button>
     </OuterDiv>
   )
 }

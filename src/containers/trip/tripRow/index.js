@@ -8,7 +8,7 @@ import {
   Row,
   Country,
 } from './styled'
-import Button from '../../../components/button'
+import { Button } from '../../../components/button/Button'
 import { Edit, Next, Trash } from '../../../assets/icons'
 import { useHistory } from 'react-router-dom'
 
@@ -39,13 +39,13 @@ const TripRow = ({ trip, editable, onDelete, ...rest }) => {
       </InfoDiv>
       <ButtonsDiv>
         <Button
+          icon={<Trash />}
           onClick={() => onDelete(trip.id)}
           mode="danger"
-          icon={<Trash />}
         />
         <Button
-          onClick={() => history.push(`/trip/${trip.id}`)}
           icon={editable ? <Edit /> : <Next />}
+          onClick={() => history.push(`/trip/${trip.id}`)}
         />
       </ButtonsDiv>
     </OuterDiv>

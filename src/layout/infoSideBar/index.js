@@ -2,7 +2,7 @@ import React from 'react'
 import Loading from '../../components/placeholders/loading'
 import Error from '../../components/placeholders/error'
 import Tips from '../../components/placeholders/tips'
-import { useResponsiveness, useTitle, useTrips } from '../../hooks'
+import { useResponsiveness, useTitle, useTrips } from 'utils/hooks'
 import { StyledDiv, InnerDiv } from './styled'
 import Trip from '../../containers/trip'
 

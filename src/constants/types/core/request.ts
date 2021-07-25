@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 import { ApiError } from './ApiError'
